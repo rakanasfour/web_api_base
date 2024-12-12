@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.radol.model.Item.ItemStatus;
-import com.radol.model.ItemPicture;
 
 public class ItemDTO {
 
@@ -27,18 +26,21 @@ public class ItemDTO {
     private Integer distributor;
     private Integer model;
     private Integer complianceCategory;
+    //i need to do more here
+    private Integer itemUomQuantity;
     
     
     private List<ChannelDTO> channels;
     private List<AttributeDTO>attributes;
     private List<SalesCategoryDTO> salesCategories;
+    private List<UomDTO> uoms;
    private List<DocumentStorageDTO> documentStorages;
 public ItemDTO(Integer itemId, String itemName, String itemSku, String itemDescription, String itemType,
 		Integer itemQuantity, String itemAvailability, String itemMsaPromoItem, BigDecimal itemBasePrice,
 		BigDecimal itemWeight, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
 		ItemStatus itemStatus, Integer manufacturerPricing, Integer distributor, Integer model,
-		Integer complianceCategory, List<ChannelDTO> channels, List<AttributeDTO> attributes,
-		List<SalesCategoryDTO> salesCategories, List<DocumentStorageDTO> documentStorages) {
+		Integer complianceCategory, Integer itemUomQuantity, List<ChannelDTO> channels, List<AttributeDTO> attributes,
+		List<SalesCategoryDTO> salesCategories, List<UomDTO> uoms, List<DocumentStorageDTO> documentStorages) {
 	super();
 	this.itemId = itemId;
 	this.itemName = itemName;
@@ -58,9 +60,11 @@ public ItemDTO(Integer itemId, String itemName, String itemSku, String itemDescr
 	this.distributor = distributor;
 	this.model = model;
 	this.complianceCategory = complianceCategory;
+	this.itemUomQuantity = itemUomQuantity;
 	this.channels = channels;
 	this.attributes = attributes;
 	this.salesCategories = salesCategories;
+	this.uoms = uoms;
 	this.documentStorages = documentStorages;
 }
 public ItemDTO() {
@@ -175,6 +179,12 @@ public Integer getComplianceCategory() {
 public void setComplianceCategory(Integer complianceCategory) {
 	this.complianceCategory = complianceCategory;
 }
+public Integer getItemUomQuantity() {
+	return itemUomQuantity;
+}
+public void setItemUomQuantity(Integer itemUomQuantity) {
+	this.itemUomQuantity = itemUomQuantity;
+}
 public List<ChannelDTO> getChannels() {
 	return channels;
 }
@@ -193,14 +203,19 @@ public List<SalesCategoryDTO> getSalesCategories() {
 public void setSalesCategories(List<SalesCategoryDTO> salesCategories) {
 	this.salesCategories = salesCategories;
 }
+public List<UomDTO> getUoms() {
+	return uoms;
+}
+public void setUoms(List<UomDTO> uoms) {
+	this.uoms = uoms;
+}
 public List<DocumentStorageDTO> getDocumentStorages() {
 	return documentStorages;
 }
 public void setDocumentStorages(List<DocumentStorageDTO> documentStorages) {
 	this.documentStorages = documentStorages;
 }
-   
-     
+ 
    
    
 }

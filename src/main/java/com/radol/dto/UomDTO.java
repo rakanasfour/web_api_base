@@ -1,6 +1,8 @@
 package com.radol.dto;
 
 
+import java.util.List;
+
 import com.radol.model.Uom.UomStatus;
 
 public class UomDTO {
@@ -12,9 +14,10 @@ public class UomDTO {
     private String uomInternalBarcode;
     private Integer shippingDimensionId;
     private Integer packagingId;
+    private List<ItemDTO> items;
     
 	public UomDTO(Integer uomId, String uomType, Integer uomLevel, UomStatus uomStatus, String uomManufacturerBarcode,
-			String uomInternalBarcode, Integer shippingDimensionId, Integer packagingId) {
+			String uomInternalBarcode, Integer shippingDimensionId, Integer packagingId, List<ItemDTO> items) {
 		super();
 		this.uomId = uomId;
 		this.uomType = uomType;
@@ -24,6 +27,7 @@ public class UomDTO {
 		this.uomInternalBarcode = uomInternalBarcode;
 		this.shippingDimensionId = shippingDimensionId;
 		this.packagingId = packagingId;
+		this.items = items;
 	}
 
 	public UomDTO() {
@@ -94,10 +98,17 @@ public class UomDTO {
 	public void setPackagingId(Integer packagingId) {
 		this.packagingId = packagingId;
 	}
-  
+
+	public List<ItemDTO> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemDTO> items) {
+		this.items = items;
+	}
     
 	
-    
+	
 	
     
     

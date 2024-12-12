@@ -70,11 +70,16 @@ public class Uom {
     
 	 @OneToMany(mappedBy="uompicture",cascade= CascadeType.ALL,orphanRemoval =true)
 	 private List<UomPicture>uompictures;
+	 
+	 
+    @OneToMany(mappedBy = "mappedUomItem", cascade = CascadeType.ALL)
+    private List<ItemUOM> itemUOMs;
 
 
 	public Uom(Integer uomId, String uomType, Integer uomLevel, Timestamp uomCreatedAt, Timestamp uomUpdatedAt,
 			String uomUpdatedAtBy, UomStatus uomStatus, String uomManufacturerBarcode, String uomInternalBarcode,
-			ShippingDimension shippingDimension, Packaging packaging, List<UomPicture> uompictures) {
+			ShippingDimension shippingDimension, Packaging packaging, List<UomPicture> uompictures,
+			List<ItemUOM> itemUOMs) {
 		super();
 		this.uomId = uomId;
 		this.uomType = uomType;
@@ -88,8 +93,8 @@ public class Uom {
 		this.shippingDimension = shippingDimension;
 		this.packaging = packaging;
 		this.uompictures = uompictures;
+		this.itemUOMs = itemUOMs;
 	}
-
 
 
 	public Uom() {
@@ -98,11 +103,9 @@ public class Uom {
 	}
 
 
-
 	public Integer getUomId() {
 		return uomId;
 	}
-
 
 
 	public void setUomId(Integer uomId) {
@@ -110,11 +113,9 @@ public class Uom {
 	}
 
 
-
 	public String getUomType() {
 		return uomType;
 	}
-
 
 
 	public void setUomType(String uomType) {
@@ -122,11 +123,9 @@ public class Uom {
 	}
 
 
-
 	public Integer getUomLevel() {
 		return uomLevel;
 	}
-
 
 
 	public void setUomLevel(Integer uomLevel) {
@@ -134,11 +133,9 @@ public class Uom {
 	}
 
 
-
 	public Timestamp getUomCreatedAt() {
 		return uomCreatedAt;
 	}
-
 
 
 	public void setUomCreatedAt(Timestamp uomCreatedAt) {
@@ -146,11 +143,9 @@ public class Uom {
 	}
 
 
-
 	public Timestamp getUomUpdatedAt() {
 		return uomUpdatedAt;
 	}
-
 
 
 	public void setUomUpdatedAt(Timestamp uomUpdatedAt) {
@@ -158,11 +153,9 @@ public class Uom {
 	}
 
 
-
 	public String getUomUpdatedAtBy() {
 		return uomUpdatedAtBy;
 	}
-
 
 
 	public void setUomUpdatedAtBy(String uomUpdatedAtBy) {
@@ -170,11 +163,9 @@ public class Uom {
 	}
 
 
-
 	public UomStatus getUomStatus() {
 		return uomStatus;
 	}
-
 
 
 	public void setUomStatus(UomStatus uomStatus) {
@@ -182,11 +173,9 @@ public class Uom {
 	}
 
 
-
 	public String getUomManufacturerBarcode() {
 		return uomManufacturerBarcode;
 	}
-
 
 
 	public void setUomManufacturerBarcode(String uomManufacturerBarcode) {
@@ -194,11 +183,9 @@ public class Uom {
 	}
 
 
-
 	public String getUomInternalBarcode() {
 		return uomInternalBarcode;
 	}
-
 
 
 	public void setUomInternalBarcode(String uomInternalBarcode) {
@@ -206,11 +193,9 @@ public class Uom {
 	}
 
 
-
 	public ShippingDimension getShippingDimension() {
 		return shippingDimension;
 	}
-
 
 
 	public void setShippingDimension(ShippingDimension shippingDimension) {
@@ -218,11 +203,9 @@ public class Uom {
 	}
 
 
-
 	public Packaging getPackaging() {
 		return packaging;
 	}
-
 
 
 	public void setPackaging(Packaging packaging) {
@@ -230,11 +213,9 @@ public class Uom {
 	}
 
 
-
 	public List<UomPicture> getUompictures() {
 		return uompictures;
 	}
-
 
 
 	public void setUompictures(List<UomPicture> uompictures) {
@@ -242,8 +223,16 @@ public class Uom {
 	}
 
 
-	 
-	 
+	public List<ItemUOM> getItemUOMs() {
+		return itemUOMs;
+	}
+
+
+	public void setItemUOMs(List<ItemUOM> itemUOMs) {
+		this.itemUOMs = itemUOMs;
+	}
+
+ 
     
 }
 

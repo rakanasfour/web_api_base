@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 import com.radol.dto.ItemDTO;
 import com.radol.model.Item;
 
-@Mapper(componentModel = "spring",uses = {ItemChannelMapper.class,ItemAttributeMapper.class,ItemSalesCategoryMapper.class})
+@Mapper(componentModel = "spring",uses = {ItemChannelMapper.class,ItemAttributeMapper.class,ItemSalesCategoryMapper.class,ItemUOMMapper.class})
 	public interface ItemMapper extends EntityMapper<ItemDTO, Item> {
 		
 	 @Mapping(source = "itemId", target = "itemId")
@@ -16,7 +16,8 @@ import com.radol.model.Item;
 	
 	  @Mapping(source = "itemAttributes", target = "attributes")
 	 @Mapping(source = "itemSalesCategories", target = "salesCategories")
-	
+	 @Mapping(source = "itemUOMs", target = "uoms")
+	 
 	 ItemDTO toDTO(Item entity );
 	 
 	 
