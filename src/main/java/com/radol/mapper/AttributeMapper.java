@@ -7,13 +7,14 @@ import org.mapstruct.Mapping;
 import com.radol.dto.AttributeDTO;
 import com.radol.model.Attribute;
 
-@Mapper(componentModel = "spring",uses = ItemChannelMapper.class)
+@Mapper(componentModel = "spring",uses = ItemAttributeMapper.class)
 public interface AttributeMapper extends EntityMapper<AttributeDTO, Attribute> {
 	
 	 @Mapping(source = "attributeId", target = "attributeId")
 	    @Mapping(source = "attributeName", target = "attributeName")
 	    @Mapping(source = "attributeType", target = "attributeType")
 	    @Mapping(source = "attributeAssistText", target = "attributeAssistText")
+	 
 	    @Mapping(source = "itemAttributes", target = "items")
 
 		AttributeDTO toDTO(Attribute entity);
