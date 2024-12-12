@@ -1,5 +1,8 @@
 package com.radol.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,14 +43,19 @@ public class SalesCategory {
         METRIC,
         IMPERIAL
     }
+    
+    @OneToMany(mappedBy = "mappedSalesCategory", cascade = CascadeType.ALL)
+    private List<ItemSalesCategory> itemSalesCategories;
 
 	public SalesCategory(Integer salesCategoryId, String salesCategoryName,
-			MeasurementType salesCategoryMeasurementType, SystemMeasurement salesCategorySystemMeasurement) {
+			MeasurementType salesCategoryMeasurementType, SystemMeasurement salesCategorySystemMeasurement,
+			List<ItemSalesCategory> itemSalesCategories) {
 		super();
 		this.salesCategoryId = salesCategoryId;
 		this.salesCategoryName = salesCategoryName;
 		this.salesCategoryMeasurementType = salesCategoryMeasurementType;
 		this.salesCategorySystemMeasurement = salesCategorySystemMeasurement;
+		this.itemSalesCategories = itemSalesCategories;
 	}
 
 	public SalesCategory() {
@@ -85,8 +94,16 @@ public class SalesCategory {
 	public void setSalesCategorySystemMeasurement(SystemMeasurement salesCategorySystemMeasurement) {
 		this.salesCategorySystemMeasurement = salesCategorySystemMeasurement;
 	}
-    
-    
+
+	public List<ItemSalesCategory> getItemSalesCategories() {
+		return itemSalesCategories;
+	}
+
+	public void setItemSalesCategories(List<ItemSalesCategory> itemSalesCategories) {
+		this.itemSalesCategories = itemSalesCategories;
+	}
+
+	
     
 
   

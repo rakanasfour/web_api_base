@@ -74,6 +74,8 @@ public class Item {
     @OneToMany(mappedBy = "mappedItemAttribute", cascade = CascadeType.ALL)
     private List<ItemAttribute> itemAttributes;
     
+    @OneToMany(mappedBy = "mappedItemSalesCategory", cascade = CascadeType.ALL)
+    private List<ItemSalesCategory> itemSalesCategories;
     
     @OneToMany(mappedBy="item")
     private List<ItemPicture> itemPictures;
@@ -85,7 +87,8 @@ public class Item {
 			Integer itemQuantity, String itemAvailability, String itemMsaPromoItem, BigDecimal itemBasePrice,
 			BigDecimal itemWeight, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
 			ItemStatus itemStatus, List<ItemChannel> itemChannels, List<ItemAttribute> itemAttributes,
-			List<ItemPicture> itemPictures, List<DocumentStorage> documentStorages) {
+			List<ItemSalesCategory> itemSalesCategories, List<ItemPicture> itemPictures,
+			List<DocumentStorage> documentStorages) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -103,6 +106,7 @@ public class Item {
 		this.itemStatus = itemStatus;
 		this.itemChannels = itemChannels;
 		this.itemAttributes = itemAttributes;
+		this.itemSalesCategories = itemSalesCategories;
 		this.itemPictures = itemPictures;
 		this.documentStorages = documentStorages;
 	}
@@ -240,6 +244,14 @@ public class Item {
 		this.itemAttributes = itemAttributes;
 	}
 
+	public List<ItemSalesCategory> getItemSalesCategories() {
+		return itemSalesCategories;
+	}
+
+	public void setItemSalesCategories(List<ItemSalesCategory> itemSalesCategories) {
+		this.itemSalesCategories = itemSalesCategories;
+	}
+
 	public List<ItemPicture> getItemPictures() {
 		return itemPictures;
 	}
@@ -255,8 +267,8 @@ public class Item {
 	public void setDocumentStorages(List<DocumentStorage> documentStorages) {
 		this.documentStorages = documentStorages;
 	}
-
-	
+    
+    
     
     
 

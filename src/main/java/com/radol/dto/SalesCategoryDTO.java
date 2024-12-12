@@ -1,5 +1,7 @@
 package com.radol.dto;
 
+import java.util.List;
+
 import com.radol.model.SalesCategory.MeasurementType;
 import com.radol.model.SalesCategory.SystemMeasurement;
 
@@ -11,13 +13,17 @@ public class SalesCategoryDTO {
     private  MeasurementType salesCategoryMeasurementType;
     private  SystemMeasurement salesCategorySystemMeasurement;
     
+    private List<ItemDTO> items;
+
 	public SalesCategoryDTO(Integer salesCategoryId, String salesCategoryName,
-			MeasurementType salesCategoryMeasurementType, SystemMeasurement salesCategorySystemMeasurement) {
+			MeasurementType salesCategoryMeasurementType, SystemMeasurement salesCategorySystemMeasurement,
+			List<ItemDTO> items) {
 		super();
 		this.salesCategoryId = salesCategoryId;
 		this.salesCategoryName = salesCategoryName;
 		this.salesCategoryMeasurementType = salesCategoryMeasurementType;
 		this.salesCategorySystemMeasurement = salesCategorySystemMeasurement;
+		this.items = items;
 	}
 
 	public SalesCategoryDTO() {
@@ -56,10 +62,14 @@ public class SalesCategoryDTO {
 	public void setSalesCategorySystemMeasurement(SystemMeasurement salesCategorySystemMeasurement) {
 		this.salesCategorySystemMeasurement = salesCategorySystemMeasurement;
 	}
-    
-	
-	
-    
+
+	public List<ItemDTO> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemDTO> items) {
+		this.items = items;
+	}
     
     
     
