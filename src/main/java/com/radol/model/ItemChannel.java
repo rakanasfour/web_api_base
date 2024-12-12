@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 @Table(name = "items_channels")
 public class ItemChannel {
 	
-	
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

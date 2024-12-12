@@ -15,6 +15,8 @@ public class ChannelDTO {
     
     
     private List<ItemDTO> items;
+    
+    
 
 	public ChannelDTO(Integer channelId, String channelDescription, List<ItemDTO> items, int channelsLevel,
 			ChannelUOM channelDefaultUom) {

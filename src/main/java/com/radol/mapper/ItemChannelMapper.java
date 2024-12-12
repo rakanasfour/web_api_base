@@ -11,7 +11,7 @@ import com.radol.model.ItemChannel;
 
 @Mapper(componentModel = "spring", uses = {ItemMapper.class, ChannelMapper.class})
 public interface ItemChannelMapper extends EntityMapper<ItemChannelDTO, ItemChannel> {
-
+/*
     // Map ItemChannelDTO to ItemChannel
     @Mapping(source = "mappedItemChannel.itemId", target = "mappedItemChannelDTOId")
     @Mapping(source = "mappedChannel.channelId", target = "mappedChannelDTOId")
@@ -20,7 +20,7 @@ public interface ItemChannelMapper extends EntityMapper<ItemChannelDTO, ItemChan
 
     @InheritInverseConfiguration
     ItemChannel toEntity(ItemChannelDTO dto);
-  
+  */
     // Map ItemChannel to ItemDTO
     @Mapping(source = "mappedItemChannel.itemId", target = "itemId")
     @Mapping(source = "mappedItemChannel.itemName", target = "itemName")

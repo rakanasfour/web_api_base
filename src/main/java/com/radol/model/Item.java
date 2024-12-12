@@ -70,11 +70,22 @@ public class Item {
 
     @OneToMany(mappedBy = "mappedItemChannel", cascade = CascadeType.ALL)
     private List<ItemChannel> itemChannels;
+    
+    @OneToMany(mappedBy = "mappedItemAttribute", cascade = CascadeType.ALL)
+    private List<ItemAttribute> itemAttributes;
+    
+    
+    @OneToMany(mappedBy="item")
+    private List<ItemPicture> itemPictures;
+    
+    @OneToMany(mappedBy="item")
+    private List<DocumentStorage> documentStorages;
 
 	public Item(Integer itemId, String itemName, String itemSku, String itemDescription, String itemType,
 			Integer itemQuantity, String itemAvailability, String itemMsaPromoItem, BigDecimal itemBasePrice,
 			BigDecimal itemWeight, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
-			ItemStatus itemStatus, List<ItemChannel> itemChannels) {
+			ItemStatus itemStatus, List<ItemChannel> itemChannels, List<ItemAttribute> itemAttributes,
+			List<ItemPicture> itemPictures, List<DocumentStorage> documentStorages) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -91,6 +102,9 @@ public class Item {
 		this.itemUpdatedAtBy = itemUpdatedAtBy;
 		this.itemStatus = itemStatus;
 		this.itemChannels = itemChannels;
+		this.itemAttributes = itemAttributes;
+		this.itemPictures = itemPictures;
+		this.documentStorages = documentStorages;
 	}
 
 	public Item() {
@@ -218,7 +232,31 @@ public class Item {
 		this.itemChannels = itemChannels;
 	}
 
-    
+	public List<ItemAttribute> getItemAttributes() {
+		return itemAttributes;
+	}
+
+	public void setItemAttributes(List<ItemAttribute> itemAttributes) {
+		this.itemAttributes = itemAttributes;
+	}
+
+	public List<ItemPicture> getItemPictures() {
+		return itemPictures;
+	}
+
+	public void setItemPictures(List<ItemPicture> itemPictures) {
+		this.itemPictures = itemPictures;
+	}
+
+	public List<DocumentStorage> getDocumentStorages() {
+		return documentStorages;
+	}
+
+	public void setDocumentStorages(List<DocumentStorage> documentStorages) {
+		this.documentStorages = documentStorages;
+	}
+
+	
     
     
 

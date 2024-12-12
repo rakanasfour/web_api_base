@@ -18,7 +18,6 @@ import jakarta.persistence.Table;
 public class Distributor {
 	
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "distributor_id", columnDefinition = "INT UNSIGNED")
@@ -38,8 +37,6 @@ public class Distributor {
 
     @Column(name = "distributor_updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Timestamp distributorUpdatedAt;
-
-
 
     @Enumerated(EnumType.STRING)
     @Column(name = "distributor_status", nullable = false)
