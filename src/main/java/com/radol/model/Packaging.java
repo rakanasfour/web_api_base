@@ -32,6 +32,8 @@ public class Packaging {
 
     public enum PackagingType {
         SINGLE,
+        TIN,
+        BUNDLE, 
         PACK,
         BOX,
         CASE,
