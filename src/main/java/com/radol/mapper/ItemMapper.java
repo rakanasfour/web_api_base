@@ -17,7 +17,6 @@ import com.radol.model.Item;
 	  @Mapping(source = "itemAttributes", target = "attributes")
 	 @Mapping(source = "itemSalesCategories", target = "salesCategories")
 	 @Mapping(source = "itemUOMs", target = "uoms")
-	 
 	 ItemDTO toDTO(Item entity );
 	 
 	 

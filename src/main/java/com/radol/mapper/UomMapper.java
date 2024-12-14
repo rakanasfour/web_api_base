@@ -18,6 +18,8 @@ import com.radol.model.Uom;
 	    @Mapping(source = "uomManufacturerBarcode", target = "uomManufacturerBarcode")
 	    @Mapping(source = "uomInternalBarcode", target = "uomInternalBarcode")
 	    @Mapping(source = "itemUOMs", target = "items")
+	    @Mapping(source = "packaging", target = "packagingId")
+	    
 		UomDTO toDTO(Uom entity);
 
 			

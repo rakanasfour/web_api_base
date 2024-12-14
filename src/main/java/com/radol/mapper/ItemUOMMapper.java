@@ -27,8 +27,10 @@ import com.radol.model.ItemUOM;
     @Mapping(source = "mappedItemUom.itemUpdatedAt", target = "itemUpdatedAt")
     @Mapping(source = "mappedItemUom.itemUpdatedAtBy", target = "itemUpdatedAtBy")
     @Mapping(source = "mappedItemUom.itemStatus", target = "itemStatus")
+
+    
     //i need to do more here
-    @Mapping(source = "itemUomQuantity", target = "itemUomQuantity")
+ 
 
    // @Mapping(source = "mappedItemChannel.manufacturerPricing", target = "manufacturerPricing")
   //  @Mapping(source = "mappedItemChannel.distributor", target = "distributor.")
@@ -46,6 +48,9 @@ import com.radol.model.ItemUOM;
     @Mapping(source = "mappedUomItem.uomType", target = "uomType")
     @Mapping(source = "mappedUomItem.uomLevel", target = "uomLevel")
     @Mapping(source = "mappedUomItem.uomManufacturerBarcode", target = "uomManufacturerBarcode")
+    
+    @Mapping(source = "itemUomQuantity", target = "itemUomQuantity")
+
     
     UomDTO toUomDTO(ItemUOM itemUOM);
 

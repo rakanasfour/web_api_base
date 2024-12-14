@@ -13,11 +13,13 @@ public class UomDTO {
     private String uomManufacturerBarcode;
     private String uomInternalBarcode;
     private Integer shippingDimensionId;
-    private Integer packagingId;
+    private PackagingDTO packagingId;
+    private Integer itemUomQuantity;
     private List<ItemDTO> items;
     
 	public UomDTO(Integer uomId, String uomType, Integer uomLevel, UomStatus uomStatus, String uomManufacturerBarcode,
-			String uomInternalBarcode, Integer shippingDimensionId, Integer packagingId, List<ItemDTO> items) {
+			String uomInternalBarcode, Integer shippingDimensionId, PackagingDTO packagingId, Integer itemUomQuantity,
+			List<ItemDTO> items) {
 		super();
 		this.uomId = uomId;
 		this.uomType = uomType;
@@ -27,6 +29,7 @@ public class UomDTO {
 		this.uomInternalBarcode = uomInternalBarcode;
 		this.shippingDimensionId = shippingDimensionId;
 		this.packagingId = packagingId;
+		this.itemUomQuantity = itemUomQuantity;
 		this.items = items;
 	}
 
@@ -91,12 +94,20 @@ public class UomDTO {
 		this.shippingDimensionId = shippingDimensionId;
 	}
 
-	public Integer getPackagingId() {
+	public PackagingDTO getPackagingId() {
 		return packagingId;
 	}
 
-	public void setPackagingId(Integer packagingId) {
+	public void setPackagingId(PackagingDTO packagingId) {
 		this.packagingId = packagingId;
+	}
+
+	public Integer getItemUomQuantity() {
+		return itemUomQuantity;
+	}
+
+	public void setItemUomQuantity(Integer itemUomQuantity) {
+		this.itemUomQuantity = itemUomQuantity;
 	}
 
 	public List<ItemDTO> getItems() {
@@ -106,8 +117,14 @@ public class UomDTO {
 	public void setItems(List<ItemDTO> items) {
 		this.items = items;
 	}
+
+    
     
 	
+    
+	
+    
+    
 	
 	
     

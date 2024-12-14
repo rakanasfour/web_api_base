@@ -39,57 +39,53 @@ public class Packaging {
         CASE,
         PALLET
     }
+
+
+
+
+	public Packaging(Integer packagingId, PackagingType packagingType) {
+		super();
+		this.packagingId = packagingId;
+		this.packagingType = packagingType;
+	}
+
+
+
+
+	public Packaging() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+	public Integer getPackagingId() {
+		return packagingId;
+	}
+
+
+
+
+	public void setPackagingId(Integer packagingId) {
+		this.packagingId = packagingId;
+	}
+
+
+
+
+	public PackagingType getPackagingType() {
+		return packagingType;
+	}
+
+
+
+
+	public void setPackagingType(PackagingType packagingType) {
+		this.packagingType = packagingType;
+	}
     
     
-	 // One-to-Many relationship with Uom
-	    @OneToMany(mappedBy = "packaging")
-	    private List<Uom> uoms = new ArrayList<>();
-
-
-		public Packaging(Integer packagingId, PackagingType packagingType, List<Uom> uoms) {
-			super();
-			this.packagingId = packagingId;
-			this.packagingType = packagingType;
-			this.uoms = uoms;
-		}
-
-
-		public Packaging() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-
-		public Integer getPackagingId() {
-			return packagingId;
-		}
-
-
-		public void setPackagingId(Integer packagingId) {
-			this.packagingId = packagingId;
-		}
-
-
-		public PackagingType getPackagingType() {
-			return packagingType;
-		}
-
-
-		public void setPackagingType(PackagingType packagingType) {
-			this.packagingType = packagingType;
-		}
-
-
-		public List<Uom> getUoms() {
-			return uoms;
-		}
-
-
-		public void setUoms(List<Uom> uoms) {
-			this.uoms = uoms;
-		}
-
-
 	
     
 }

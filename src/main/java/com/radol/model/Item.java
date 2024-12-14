@@ -85,7 +85,6 @@ public class Item {
     
     @OneToMany(mappedBy="item")
     private List<DocumentStorage> documentStorages;
-    
 
 	public Item(Integer itemId, String itemName, String itemSku, String itemDescription, String itemType,
 			Integer itemQuantity, String itemAvailability, String itemMsaPromoItem, BigDecimal itemBasePrice,
@@ -280,7 +279,8 @@ public class Item {
 	public void setDocumentStorages(List<DocumentStorage> documentStorages) {
 		this.documentStorages = documentStorages;
 	}
+    
 
-	
+    
 
 }

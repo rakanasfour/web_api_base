@@ -27,9 +27,9 @@ public class ItemDTO {
     private Integer model;
     private Integer complianceCategory;
     //i need to do more here
-    private Integer itemUomQuantity;
+ 
     
-    
+    private List<ItemPictureDTO> itemPictures;
     private List<ChannelDTO> channels;
     private List<AttributeDTO>attributes;
     private List<SalesCategoryDTO> salesCategories;
@@ -39,8 +39,9 @@ public ItemDTO(Integer itemId, String itemName, String itemSku, String itemDescr
 		Integer itemQuantity, String itemAvailability, String itemMsaPromoItem, BigDecimal itemBasePrice,
 		BigDecimal itemWeight, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
 		ItemStatus itemStatus, Integer manufacturerPricing, Integer distributor, Integer model,
-		Integer complianceCategory, Integer itemUomQuantity, List<ChannelDTO> channels, List<AttributeDTO> attributes,
-		List<SalesCategoryDTO> salesCategories, List<UomDTO> uoms, List<DocumentStorageDTO> documentStorages) {
+		Integer complianceCategory, List<ItemPictureDTO> itemPictures, List<ChannelDTO> channels,
+		List<AttributeDTO> attributes, List<SalesCategoryDTO> salesCategories, List<UomDTO> uoms,
+		List<DocumentStorageDTO> documentStorages) {
 	super();
 	this.itemId = itemId;
 	this.itemName = itemName;
@@ -60,7 +61,7 @@ public ItemDTO(Integer itemId, String itemName, String itemSku, String itemDescr
 	this.distributor = distributor;
 	this.model = model;
 	this.complianceCategory = complianceCategory;
-	this.itemUomQuantity = itemUomQuantity;
+	this.itemPictures = itemPictures;
 	this.channels = channels;
 	this.attributes = attributes;
 	this.salesCategories = salesCategories;
@@ -179,11 +180,11 @@ public Integer getComplianceCategory() {
 public void setComplianceCategory(Integer complianceCategory) {
 	this.complianceCategory = complianceCategory;
 }
-public Integer getItemUomQuantity() {
-	return itemUomQuantity;
+public List<ItemPictureDTO> getItemPictures() {
+	return itemPictures;
 }
-public void setItemUomQuantity(Integer itemUomQuantity) {
-	this.itemUomQuantity = itemUomQuantity;
+public void setItemPictures(List<ItemPictureDTO> itemPictures) {
+	this.itemPictures = itemPictures;
 }
 public List<ChannelDTO> getChannels() {
 	return channels;
@@ -215,7 +216,7 @@ public List<DocumentStorageDTO> getDocumentStorages() {
 public void setDocumentStorages(List<DocumentStorageDTO> documentStorages) {
 	this.documentStorages = documentStorages;
 }
- 
+
    
    
 }
