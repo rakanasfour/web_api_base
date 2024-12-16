@@ -68,8 +68,6 @@ public class Item {
         AVAILABLE, NOTAVAILABLE, DISCONTINUED
     }
 
-    @OneToMany(mappedBy = "mappedItemChannel", cascade = CascadeType.ALL)
-    private List<ItemChannel> itemChannels;
     
     @OneToMany(mappedBy = "mappedItemAttribute", cascade = CascadeType.ALL)
     private List<ItemAttribute> itemAttributes;
@@ -89,9 +87,8 @@ public class Item {
 	public Item(Integer itemId, String itemName, String itemSku, String itemDescription, String itemType,
 			Integer itemQuantity, String itemAvailability, String itemMsaPromoItem, BigDecimal itemBasePrice,
 			BigDecimal itemWeight, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
-			ItemStatus itemStatus, List<ItemChannel> itemChannels, List<ItemAttribute> itemAttributes,
-			List<ItemSalesCategory> itemSalesCategories, List<ItemUOM> itemUOMs, List<ItemPicture> itemPictures,
-			List<DocumentStorage> documentStorages) {
+			ItemStatus itemStatus, List<ItemAttribute> itemAttributes, List<ItemSalesCategory> itemSalesCategories,
+			List<ItemUOM> itemUOMs, List<ItemPicture> itemPictures, List<DocumentStorage> documentStorages) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -107,7 +104,6 @@ public class Item {
 		this.itemUpdatedAt = itemUpdatedAt;
 		this.itemUpdatedAtBy = itemUpdatedAtBy;
 		this.itemStatus = itemStatus;
-		this.itemChannels = itemChannels;
 		this.itemAttributes = itemAttributes;
 		this.itemSalesCategories = itemSalesCategories;
 		this.itemUOMs = itemUOMs;
@@ -232,14 +228,6 @@ public class Item {
 		this.itemStatus = itemStatus;
 	}
 
-	public List<ItemChannel> getItemChannels() {
-		return itemChannels;
-	}
-
-	public void setItemChannels(List<ItemChannel> itemChannels) {
-		this.itemChannels = itemChannels;
-	}
-
 	public List<ItemAttribute> getItemAttributes() {
 		return itemAttributes;
 	}
@@ -279,7 +267,8 @@ public class Item {
 	public void setDocumentStorages(List<DocumentStorage> documentStorages) {
 		this.documentStorages = documentStorages;
 	}
-    
+
+	
 
     
 

@@ -6,15 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.radol.dto.DisplayPageDTO;
 import com.radol.model.Item;
-import com.radol.model.ItemChannel;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	
-	@Query("SELECT ic FROM ItemChannel ic JOIN FETCH ic.mappedChannel JOIN FETCH ic.mappedItemChannel")
-    List<ItemChannel> findAllWithRelations();
+	//@Query("SELECT ic FROM ItemChannel ic JOIN FETCH ic.mappedChannel JOIN FETCH ic.mappedItemChannel")
+ //   List<ItemChannel> findAllWithRelations();
 	
 	
 	
@@ -38,7 +38,27 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	    List<ItemUOMDTO> findItemUom(@Param("itemId") int itemId);
 
 	///Optional<ItemUOMDTO> findItemNamesById(@Param("itemId") int itemId);
+
+	
+	@Query("SELECT new com.radol.dto.DisplayPageDTO(i.itemName, i.itemSku, i.itemDescription, i.itemType, i.itemQuantity, i.itemAvailability, i.itemBasePrice, u.uomType, iu.itemUomQuantity) " +
+		       "FROM Item i " +
+		       "JOIN i.itemsUoms iu " +
+		       "JOIN iu.uom u")
 */
+	
+	//@Query("SELECT new com.radol.dto.DisplayPageDTO(i.itemName, i.itemSku, i.itemDescription, i.itemType) " +
+//		       "FROM Item i ")
+	
+
+
+	@Query("SELECT new com.radol.dto.DisplayPageDTO(" +
+		       "i.itemName, i.itemSku, i.itemDescription, i.itemType,i.itemQuantity,i.itemBasePrice, i.itemWeight, u.uomType, u.uomLevel, iu.itemUomQuantity) " +
+		       "FROM ItemUOM iu " +
+		       "JOIN iu.mappedItemUom i " +
+		       "JOIN iu.mappedUomItem u " + 
+		       "WHERE i.itemId = 1 ") 
+		List<DisplayPageDTO> getDisplayPage();
+
 
 
 }

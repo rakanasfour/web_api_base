@@ -1,6 +1,5 @@
 package com.radol.model;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -74,12 +73,16 @@ public class Uom {
 	 
     @OneToMany(mappedBy = "mappedUomItem", cascade = CascadeType.ALL)
     private List<ItemUOM> itemUOMs;
+    
+    
+    @OneToMany(mappedBy = "mappedUomChannel", cascade = CascadeType.ALL)
+    private List<UomChannel> uomChannels;
 
 
 	public Uom(Integer uomId, String uomType, Integer uomLevel, Timestamp uomCreatedAt, Timestamp uomUpdatedAt,
 			String uomUpdatedAtBy, UomStatus uomStatus, String uomManufacturerBarcode, String uomInternalBarcode,
 			ShippingDimension shippingDimension, Packaging packaging, List<UomPicture> uompictures,
-			List<ItemUOM> itemUOMs) {
+			List<ItemUOM> itemUOMs, List<UomChannel> uomChannels) {
 		super();
 		this.uomId = uomId;
 		this.uomType = uomType;
@@ -94,6 +97,7 @@ public class Uom {
 		this.packaging = packaging;
 		this.uompictures = uompictures;
 		this.itemUOMs = itemUOMs;
+		this.uomChannels = uomChannels;
 	}
 
 
@@ -232,7 +236,18 @@ public class Uom {
 		this.itemUOMs = itemUOMs;
 	}
 
- 
+
+	public List<UomChannel> getUomChannels() {
+		return uomChannels;
+	}
+
+
+	public void setUomChannels(List<UomChannel> uomChannels) {
+		this.uomChannels = uomChannels;
+	}
+    
+
+    
     
 }
 

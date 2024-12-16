@@ -27,6 +27,7 @@ public class BrandController implements CrudController<BrandDTO, Integer> {
         this.brandService = brandService;
     }
 
+    
     @GetMapping
     @Override
     public ResponseEntity<List<BrandDTO>> getAll() {

@@ -1,22 +1,18 @@
 package com.radol.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.radol.dto.DisplayPageDTO;
 import com.radol.dto.ItemDTO;
-import com.radol.mapper.ChannelMapper;
 import com.radol.mapper.ItemMapper;
-import com.radol.model.Channel;
 import com.radol.model.Item;
-import com.radol.model.ItemChannel;
-import com.radol.repository.ChannelRepository;
-import com.radol.repository.ItemChannelRepository;
 import com.radol.repository.ItemRepository;
 import com.radol.service.ItemService;
-
 
 
 @Service
@@ -26,38 +22,21 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
-    private final ChannelMapper channelMapper;
-    private final ChannelRepository channelRepository;
-    private final ItemChannelRepository itemChannelRepository;
+
     
     
-    public ItemServiceImpl(ItemRepository itemRepository, ItemMapper itemMapper,  ChannelMapper channelMapper, ChannelRepository channelRepository,  ItemChannelRepository itemChannelRepository) {
+    public ItemServiceImpl(ItemRepository itemRepository, ItemMapper itemMapper) {
         this.itemRepository = itemRepository;
         this.itemMapper = itemMapper;
-        this.channelMapper=channelMapper;
-        this.channelRepository=channelRepository;
-        this.itemChannelRepository=itemChannelRepository;
+
     }
 
     @Override
     public ItemDTO save(ItemDTO dto) {
         Item item = itemMapper.toEntity(dto);
 
-        // Process channels and create ItemChannel entries
-        if (dto.getChannels() != null && !dto.getChannels().isEmpty()) {
-            List<ItemChannel> itemChannels = dto.getChannels().stream().map(channelDto -> {
-                Channel channel = channelRepository.findById(channelDto.getChannelId())
-                        .orElseThrow(() -> new RuntimeException("Channel not found"));
-                ItemChannel itemChannel = new ItemChannel();
-                itemChannel.setMappedItemChannel(item);
-                itemChannel.setMappedChannel(channel);
-                return itemChannel;
-            }).collect(Collectors.toList());
-            item.setItemChannels(itemChannels);
-        }
-
-        Item savedItem = itemRepository.save(item);
-        return itemMapper.toDTO(savedItem);
+     
+        return itemMapper.toDTO(itemRepository.save(item));
     }
     
     
@@ -87,4 +66,32 @@ public class ItemServiceImpl implements ItemService {
     public void deleteById(Integer id) {
         itemRepository.deleteById(id);
     }
+
+    
+
+    public List<DisplayPageDTO> getDisplayPage() {
+        return itemRepository.getDisplayPage().stream()
+                .map(displayPage -> {
+                    // Calculate total price
+                    BigDecimal totalPrice = displayPage.getItemBasePrice()
+                            .multiply(BigDecimal.valueOf(displayPage.getItemUomQuantity()));
+                    displayPage.setItemBasePrice(totalPrice); // Update the base price
+                    
+                    // Calculate total quantity
+                    BigDecimal totalQuantity = BigDecimal.valueOf(displayPage.getItemQuantity())
+                            .multiply(BigDecimal.valueOf(displayPage.getItemUomQuantity()));
+                    displayPage.setItemQuantity(totalQuantity.intValue()); // Update the quantity (convert back to Integer)
+
+                    // Calculate total weight
+                    BigDecimal totalWeight = displayPage.getItemWeight()
+                            .multiply(BigDecimal.valueOf(displayPage.getItemUomQuantity()));
+                    displayPage.setItemWeight(totalWeight); // Update the weight
+
+                    return displayPage;
+                })
+                .collect(Collectors.toList());
+    }
+
+	
+    
 }

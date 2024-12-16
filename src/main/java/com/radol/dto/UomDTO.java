@@ -16,10 +16,11 @@ public class UomDTO {
     private PackagingDTO packagingId;
     private Integer itemUomQuantity;
     private List<ItemDTO> items;
+    private List<ChannelDTO> channels;
     
 	public UomDTO(Integer uomId, String uomType, Integer uomLevel, UomStatus uomStatus, String uomManufacturerBarcode,
 			String uomInternalBarcode, Integer shippingDimensionId, PackagingDTO packagingId, Integer itemUomQuantity,
-			List<ItemDTO> items) {
+			List<ItemDTO> items, List<ChannelDTO> channels) {
 		super();
 		this.uomId = uomId;
 		this.uomType = uomType;
@@ -31,6 +32,7 @@ public class UomDTO {
 		this.packagingId = packagingId;
 		this.itemUomQuantity = itemUomQuantity;
 		this.items = items;
+		this.channels = channels;
 	}
 
 	public UomDTO() {
@@ -118,7 +120,15 @@ public class UomDTO {
 		this.items = items;
 	}
 
-    
+	public List<ChannelDTO> getChannels() {
+		return channels;
+	}
+
+	public void setChannels(List<ChannelDTO> channels) {
+		this.channels = channels;
+	}
+	
+	
     
 	
     

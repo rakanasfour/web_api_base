@@ -44,78 +44,69 @@ public class Channel {
     }
     
     @OneToMany(mappedBy = "mappedChannel", cascade = CascadeType.ALL)
-    private List<ItemChannel> itemChannels;
-
+    private List<UomChannel> uomChannels;
 
 	public Channel(Integer channelId, String channelDescription, int channelsLevel, ChannelUOM channelDefaultUom,
-			List<ItemChannel> itemChannels) {
+			List<UomChannel> uomChannels) {
 		super();
 		this.channelId = channelId;
 		this.channelDescription = channelDescription;
 		this.channelsLevel = channelsLevel;
 		this.channelDefaultUom = channelDefaultUom;
-		this.itemChannels = itemChannels;
+		this.uomChannels = uomChannels;
 	}
-
 
 	public Channel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Integer getChannelId() {
 		return channelId;
 	}
-
 
 	public void setChannelId(Integer channelId) {
 		this.channelId = channelId;
 	}
 
-
 	public String getChannelDescription() {
 		return channelDescription;
 	}
-
 
 	public void setChannelDescription(String channelDescription) {
 		this.channelDescription = channelDescription;
 	}
 
-
 	public int getChannelsLevel() {
 		return channelsLevel;
 	}
-
 
 	public void setChannelsLevel(int channelsLevel) {
 		this.channelsLevel = channelsLevel;
 	}
 
-
 	public ChannelUOM getChannelDefaultUom() {
 		return channelDefaultUom;
 	}
-
 
 	public void setChannelDefaultUom(ChannelUOM channelDefaultUom) {
 		this.channelDefaultUom = channelDefaultUom;
 	}
 
-
-	public List<ItemChannel> getItemChannels() {
-		return itemChannels;
+	public List<UomChannel> getUomChannels() {
+		return uomChannels;
 	}
 
-
-	public void setItemChannels(List<ItemChannel> itemChannels) {
-		this.itemChannels = itemChannels;
+	public void setUomChannels(List<UomChannel> uomChannels) {
+		this.uomChannels = uomChannels;
 	}
+    
+    
+    
 
 
+    
 	
-   
 
     
 

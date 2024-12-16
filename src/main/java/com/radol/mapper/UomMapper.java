@@ -8,7 +8,7 @@ import com.radol.dto.UomDTO;
 import com.radol.model.Uom;
 	
 	
-	@Mapper(componentModel = "spring", uses= {ItemUOMMapper.class })
+	@Mapper(componentModel = "spring", uses= {ItemUOMMapper.class, UomChannelMapper.class })
 	public interface UomMapper extends EntityMapper<UomDTO, Uom> {
 		
 	    @Mapping(source = "uomId", target = "uomId")
@@ -19,6 +19,7 @@ import com.radol.model.Uom;
 	    @Mapping(source = "uomInternalBarcode", target = "uomInternalBarcode")
 	    @Mapping(source = "itemUOMs", target = "items")
 	    @Mapping(source = "packaging", target = "packagingId")
+	    @Mapping(source = "uomChannels", target = "channels")
 	    
 		UomDTO toDTO(Uom entity);
 

@@ -14,70 +14,77 @@ public class ChannelDTO {
     private ChannelUOM channelDefaultUom;
     
     
-    private List<ItemDTO> items;
-    
-    
+    private List<UomDTO> uoms;
 
-	public ChannelDTO(Integer channelId, String channelDescription, List<ItemDTO> items, int channelsLevel,
-			ChannelUOM channelDefaultUom) {
+
+	public ChannelDTO(Integer channelId, String channelDescription, int channelsLevel, ChannelUOM channelDefaultUom,
+			List<UomDTO> uoms) {
 		super();
 		this.channelId = channelId;
 		this.channelDescription = channelDescription;
-		this.items = items;
 		this.channelsLevel = channelsLevel;
 		this.channelDefaultUom = channelDefaultUom;
+		this.uoms = uoms;
 	}
+
 
 	public ChannelDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public Integer getChannelId() {
 		return channelId;
 	}
+
 
 	public void setChannelId(Integer channelId) {
 		this.channelId = channelId;
 	}
 
+
 	public String getChannelDescription() {
 		return channelDescription;
 	}
+
 
 	public void setChannelDescription(String channelDescription) {
 		this.channelDescription = channelDescription;
 	}
 
-	public List<ItemDTO> getItems() {
-		return items;
-	}
-
-	public void setItems(List<ItemDTO> items) {
-		this.items = items;
-	}
 
 	public int getChannelsLevel() {
 		return channelsLevel;
 	}
 
+
 	public void setChannelsLevel(int channelsLevel) {
 		this.channelsLevel = channelsLevel;
 	}
+
 
 	public ChannelUOM getChannelDefaultUom() {
 		return channelDefaultUom;
 	}
 
+
 	public void setChannelDefaultUom(ChannelUOM channelDefaultUom) {
 		this.channelDefaultUom = channelDefaultUom;
 	}
-    
-	
-    
-    
-    
 
+
+	public List<UomDTO> getUoms() {
+		return uoms;
+	}
+
+
+	public void setUoms(List<UomDTO> uoms) {
+		this.uoms = uoms;
+	}
+
+
+    
     
 
 	
