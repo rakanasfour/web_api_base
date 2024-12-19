@@ -10,33 +10,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ItemDTO;
-import com.radol.service.impl.RetailServiceImpl;
-
+import com.radol.service.impl.CustomerServiceImpl;
 
 
 @RestController
-@RequestMapping("retail/api/items")
-public class RetailController  {
+@RequestMapping("customer/api/items")
+public class CustomerController  {
 
-    private final RetailServiceImpl retailServiceImpl;
+    private final CustomerServiceImpl customerServiceImpl;
 
-    public RetailController(RetailServiceImpl retailServiceImpl) {
-    	this.retailServiceImpl=retailServiceImpl;
-    	}
+    public CustomerController(CustomerServiceImpl customerServiceImpl) {
+        this.customerServiceImpl = customerServiceImpl;
+    }
 
     @GetMapping
     public ResponseEntity<List<ItemDTO>> getAll() {
-        List<ItemDTO> items = retailServiceImpl.findAll();
+        List<ItemDTO> items = customerServiceImpl.findAll();
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ItemDTO> getById(@PathVariable Integer id) {
-        ItemDTO item = retailServiceImpl.findByIdRetail(id);
+        ItemDTO item = customerServiceImpl.findByIdCustomer(id);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
    
 
 }
-

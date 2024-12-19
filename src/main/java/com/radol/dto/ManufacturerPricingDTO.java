@@ -11,6 +11,7 @@ public class ManufacturerPricingDTO {
     private BigDecimal pricingWholesalePrice;
     private BigDecimal pricingFederalExciseTax;
     private BigDecimal pricingCost;
+    
 
     // Getters and Setters
 

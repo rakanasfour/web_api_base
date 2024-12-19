@@ -8,12 +8,10 @@ import com.radol.model.Item;
 
 public interface ItemService  extends CrudService<ItemDTO, Item, Integer>  {
 	
+	/*
 	
-	
-	public List<DisplayPageDTO> getDisplayPage();
-
-
-		
+	public List<DisplayPageDTO> getDisplayPage(Long itemId);
+	*/
 
 		   
 	}

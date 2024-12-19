@@ -14,7 +14,7 @@ import com.radol.model.ItemPicture;
 
 
 		
-	 @Mapping(source = "item.itemId", target = "itemId")
+	 @Mapping(source = "itemPItemId.itemId", target = "itemId")
 	
 	 ItemPictureDTO toDTO(ItemPicture entity );
 	 

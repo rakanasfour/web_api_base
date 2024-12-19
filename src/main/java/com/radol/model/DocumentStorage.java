@@ -24,30 +24,47 @@ public class DocumentStorage {
     // Many-to-one relationship with Item
     @ManyToOne
     @JoinColumn(name = "document_s_item_id", referencedColumnName = "item_id", nullable = false)
-    private Item item;
+    private Item  documentSItemId;
 
-    // Getters and Setters
-    public Integer getDocumentStorageId() {
-        return documentStorageId;
-    }
+	public DocumentStorage(Integer documentStorageId, String documentStorage1, Item documentSItemId) {
+		super();
+		this.documentStorageId = documentStorageId;
+		this.documentStorage1 = documentStorage1;
+		this.documentSItemId = documentSItemId;
+	}
 
-    public void setDocumentStorageId(Integer documentStorageId) {
-        this.documentStorageId = documentStorageId;
-    }
+	public DocumentStorage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public String getDocumentStorage1() {
-        return documentStorage1;
-    }
+	public Integer getDocumentStorageId() {
+		return documentStorageId;
+	}
 
-    public void setDocumentStorage1(String documentStorage1) {
-        this.documentStorage1 = documentStorage1;
-    }
+	public void setDocumentStorageId(Integer documentStorageId) {
+		this.documentStorageId = documentStorageId;
+	}
 
-    public Item getItem() {
-        return item;
-    }
+	public String getDocumentStorage1() {
+		return documentStorage1;
+	}
 
-    public void setItem(Item item) {
-        this.item = item;
-    }
+	public void setDocumentStorage1(String documentStorage1) {
+		this.documentStorage1 = documentStorage1;
+	}
+
+	public Item getDocumentSItemId() {
+		return documentSItemId;
+	}
+
+	public void setDocumentSItemId(Item documentSItemId) {
+		this.documentSItemId = documentSItemId;
+	}
+
+	
+	
+    
+    
+    
 }

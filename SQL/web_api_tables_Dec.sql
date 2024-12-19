@@ -1,9 +1,7 @@
 
-CREATE DATABASE web_api_base;
-use web_api_base;
-
-
-
+Drop database web_api_cigarette;
+CREATE DATABASE web_api_cigarette;
+use web_api_cigarette;
 
 # this is just for the users who can access the system 
 CREATE TABLE users (
@@ -168,38 +166,12 @@ CREATE TABLE sales_categories (
 #one item will have differnt unit of measurement one box will have 1)box 2)single 3)case 4)pallet
 
 
-CREATE TABLE uoms (
-    uom_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    uom_type VARCHAR(50) NOT NULL,
-    uom_level INT,
-	uom_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	uom_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	uom_updated_at_by Varchar(99),
-	uom_status ENUM('AVAILABLE','NOTAVAILABLE', 'DISCONTINUED') NOT NULL DEFAULT 'AVAILABLE',
- 
-    #I am not sure yet
-	uom_manufacturer_barcode Varchar(55),
-     #I am not sure yet
-	uom_internal_barcode Varchar(55),
-     #one to one 
-	uom_shipping_dimension_id INT UNSIGNED ,
-	foreign key (uom_shipping_dimension_id) REFERENCES shipping_dimensions(shipping_dimension_id),
-       #many to one 
-	uom_packaging_id int UNSIGNED,
-	foreign key (uom_packaging_id) references packaging(packaging_id)
-);
 
 
 
 
-create table uom_pictures(
- uom_picture_id int UNSIGNED primary key auto_increment,
- uom_picture_name varchar(99),
- uom_picture_link varchar(300),
-# many to one
- uom_picture_uom_id int UNSIGNED,
-foreign key (uom_picture_uom_id) references uoms(uom_id)
-);
+
+
 
 
 CREATE TABLE items (
@@ -207,13 +179,8 @@ CREATE TABLE items (
     item_name VARCHAR(100) NOT NULL,
 	item_sku varchar(99),
 	item_description TEXT,
-    item_type varchar(250),
-    item_quantity int,
     item_availability varchar(55),
     item_msa_promo_item varchar(55),
-    item_base_price DECIMAL(10, 2) NOT NULL,
-    item_weight DECIMAL(10, 2) NOT NULL,
-    
     item_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	item_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	item_updated_at_by Varchar(99),
@@ -232,6 +199,49 @@ CREATE TABLE items (
 	item_compliance_category_id int UNSIGNED unique, 
 	foreign key (item_compliance_category_id) references compliance_categories(compliance_category_id),
     INDEX (item_name) 
+);
+
+
+
+CREATE TABLE uoms (
+    uom_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uom_type VARCHAR(50) NOT NULL,
+	uom_sub_type VARCHAR(50)  NOT NULL,
+    uom_quantity INT  NOT NULL,
+    uom_level INT,
+	uom_weight DECIMAL(10, 2) NOT NULL,
+	uom_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	uom_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	uom_updated_at_by Varchar(99),
+	uom_status ENUM('AVAILABLE','NOTAVAILABLE', 'DISCONTINUED') NOT NULL DEFAULT 'AVAILABLE',
+ 
+    #I am not sure yet
+	uom_manufacturer_barcode Varchar(55),
+     #I am not sure yet
+	uom_internal_barcode Varchar(55),
+     #one to one 
+	uom_shipping_dimension_id INT UNSIGNED ,
+	foreign key (uom_shipping_dimension_id) REFERENCES shipping_dimensions(shipping_dimension_id),
+       #many to one 
+	uom_packaging_id int UNSIGNED,
+	foreign key (uom_packaging_id) references packaging(packaging_id),
+    
+     #many to one 
+    uom_item_id int UNSIGNED,
+	foreign key (uom_item_id) references items(item_id),
+    
+    uom_manufacturer_pricing_id INT UNSIGNED ,
+	foreign key (uom_manufacturer_pricing_id) REFERENCES manufacturer_pricing(m_pricing_id)
+);
+
+
+create table uom_pictures(
+ uom_picture_id int UNSIGNED primary key auto_increment,
+ uom_picture_name varchar(99),
+ uom_picture_link varchar(300),
+# many to one
+ uom_picture_uom_id int UNSIGNED,
+foreign key (uom_picture_uom_id) references uoms(uom_id)
 );
 
 
@@ -254,23 +264,14 @@ foreign key (document_s_item_id) references items(item_id)
 );
 
 
-CREATE TABLE items_uoms (
-    item_uom_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    item_uom_quantity INT,  
- 
-	item_uom_item_id INT UNSIGNED,
-    FOREIGN KEY (item_uom_item_id) REFERENCES items(item_id),
-    
-    item_uom_uom_id INT UNSIGNED,
-    FOREIGN KEY (item_uom_uom_id) REFERENCES uoms(uom_id)
-);
 
-CREATE TABLE items_channels (
-    item_ch_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    item_ch_channel_id INT UNSIGNED,
-    FOREIGN KEY (item_ch_channel_id) REFERENCES channels(Channel_id),
-   item_ch_item_id INT UNSIGNED,
-    FOREIGN KEY (item_ch_item_id) REFERENCES items(item_id)
+
+CREATE TABLE uoms_channels (
+    uom_ch_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uom_ch_channel_id INT UNSIGNED,
+    FOREIGN KEY (uom_ch_channel_id) REFERENCES channels(Channel_id),
+   uom_ch_uom_id INT UNSIGNED,
+    FOREIGN KEY (uom_ch_uom_id) REFERENCES uoms(uom_id)
 );
 
 
@@ -296,5 +297,4 @@ CREATE TABLE item_sales_categories (
     item_s_c_category_id INT UNSIGNED,
     FOREIGN KEY (item_s_c_category_id) REFERENCES sales_categories(s_category_id)
 );
-
 

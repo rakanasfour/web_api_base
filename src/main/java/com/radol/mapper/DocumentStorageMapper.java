@@ -7,14 +7,13 @@ import org.mapstruct.Mapping;
 import com.radol.dto.DocumentStorageDTO;
 import com.radol.model.DocumentStorage;
 
-
 @Mapper(componentModel = "spring")
 	public interface DocumentStorageMapper extends EntityMapper<DocumentStorageDTO, DocumentStorage> {
 		
 	
 	
 	
-	 @Mapping(source = "item.itemId", target = "itemId")
+	 @Mapping(source = "documentSItemId.itemId", target = "itemId")
 	
 	 DocumentStorageDTO toDTO(DocumentStorage entity );
 	 

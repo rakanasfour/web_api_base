@@ -1,4 +1,5 @@
 package com.radol.model;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -27,7 +28,15 @@ public class Uom {
 
     @Column(name = "uom_type", length = 50, nullable = false)
     private String uomType;
-
+    
+    @Column(name = "uom_sub_type", nullable = false)
+    private String uomSubType;
+    
+    @Column(name = "uom_quantity", nullable = false)
+    private Integer uomQuantity;
+    
+    @Column(name = "uom_weight", nullable = false)
+    private BigDecimal uomWeight;
     @Column(name = "uom_level")
     private Integer uomLevel;
 
@@ -69,23 +78,29 @@ public class Uom {
     
 	 @OneToMany(mappedBy="uompicture",cascade= CascadeType.ALL,orphanRemoval =true)
 	 private List<UomPicture>uompictures;
-	 
-	 
-    @OneToMany(mappedBy = "mappedUomItem", cascade = CascadeType.ALL)
-    private List<ItemUOM> itemUOMs;
-    
+	
+    @ManyToOne
+    @JoinColumn(name = "uom_item_id",  referencedColumnName ="item_id")
+    private Item items;
     
     @OneToMany(mappedBy = "mappedUomChannel", cascade = CascadeType.ALL)
     private List<UomChannel> uomChannels;
+    
+    @OneToOne
+    @JoinColumn(name = "uom_manufacturer_pricing_id", referencedColumnName = "m_pricing_id", unique = true)
+    private ManufacturerPricing manufacturerPricing;
 
-
-	public Uom(Integer uomId, String uomType, Integer uomLevel, Timestamp uomCreatedAt, Timestamp uomUpdatedAt,
-			String uomUpdatedAtBy, UomStatus uomStatus, String uomManufacturerBarcode, String uomInternalBarcode,
-			ShippingDimension shippingDimension, Packaging packaging, List<UomPicture> uompictures,
-			List<ItemUOM> itemUOMs, List<UomChannel> uomChannels) {
+	public Uom(Integer uomId, String uomType, String uomSubType, Integer uomQuantity, BigDecimal uomWeight,
+			Integer uomLevel, Timestamp uomCreatedAt, Timestamp uomUpdatedAt, String uomUpdatedAtBy,
+			UomStatus uomStatus, String uomManufacturerBarcode, String uomInternalBarcode,
+			ShippingDimension shippingDimension, Packaging packaging, List<UomPicture> uompictures, Item items,
+			List<UomChannel> uomChannels, ManufacturerPricing manufacturerPricing) {
 		super();
 		this.uomId = uomId;
 		this.uomType = uomType;
+		this.uomSubType = uomSubType;
+		this.uomQuantity = uomQuantity;
+		this.uomWeight = uomWeight;
 		this.uomLevel = uomLevel;
 		this.uomCreatedAt = uomCreatedAt;
 		this.uomUpdatedAt = uomUpdatedAt;
@@ -96,157 +111,161 @@ public class Uom {
 		this.shippingDimension = shippingDimension;
 		this.packaging = packaging;
 		this.uompictures = uompictures;
-		this.itemUOMs = itemUOMs;
+		this.items = items;
 		this.uomChannels = uomChannels;
+		this.manufacturerPricing = manufacturerPricing;
 	}
-
 
 	public Uom() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Integer getUomId() {
 		return uomId;
 	}
-
 
 	public void setUomId(Integer uomId) {
 		this.uomId = uomId;
 	}
 
-
 	public String getUomType() {
 		return uomType;
 	}
-
 
 	public void setUomType(String uomType) {
 		this.uomType = uomType;
 	}
 
+	public String getUomSubType() {
+		return uomSubType;
+	}
+
+	public void setUomSubType(String uomSubType) {
+		this.uomSubType = uomSubType;
+	}
+
+	public Integer getUomQuantity() {
+		return uomQuantity;
+	}
+
+	public void setUomQuantity(Integer uomQuantity) {
+		this.uomQuantity = uomQuantity;
+	}
+
+	public BigDecimal getUomWeight() {
+		return uomWeight;
+	}
+
+	public void setUomWeight(BigDecimal uomWeight) {
+		this.uomWeight = uomWeight;
+	}
 
 	public Integer getUomLevel() {
 		return uomLevel;
 	}
 
-
 	public void setUomLevel(Integer uomLevel) {
 		this.uomLevel = uomLevel;
 	}
-
 
 	public Timestamp getUomCreatedAt() {
 		return uomCreatedAt;
 	}
 
-
 	public void setUomCreatedAt(Timestamp uomCreatedAt) {
 		this.uomCreatedAt = uomCreatedAt;
 	}
-
 
 	public Timestamp getUomUpdatedAt() {
 		return uomUpdatedAt;
 	}
 
-
 	public void setUomUpdatedAt(Timestamp uomUpdatedAt) {
 		this.uomUpdatedAt = uomUpdatedAt;
 	}
-
 
 	public String getUomUpdatedAtBy() {
 		return uomUpdatedAtBy;
 	}
 
-
 	public void setUomUpdatedAtBy(String uomUpdatedAtBy) {
 		this.uomUpdatedAtBy = uomUpdatedAtBy;
 	}
-
 
 	public UomStatus getUomStatus() {
 		return uomStatus;
 	}
 
-
 	public void setUomStatus(UomStatus uomStatus) {
 		this.uomStatus = uomStatus;
 	}
-
 
 	public String getUomManufacturerBarcode() {
 		return uomManufacturerBarcode;
 	}
 
-
 	public void setUomManufacturerBarcode(String uomManufacturerBarcode) {
 		this.uomManufacturerBarcode = uomManufacturerBarcode;
 	}
-
 
 	public String getUomInternalBarcode() {
 		return uomInternalBarcode;
 	}
 
-
 	public void setUomInternalBarcode(String uomInternalBarcode) {
 		this.uomInternalBarcode = uomInternalBarcode;
 	}
-
 
 	public ShippingDimension getShippingDimension() {
 		return shippingDimension;
 	}
 
-
 	public void setShippingDimension(ShippingDimension shippingDimension) {
 		this.shippingDimension = shippingDimension;
 	}
-
 
 	public Packaging getPackaging() {
 		return packaging;
 	}
 
-
 	public void setPackaging(Packaging packaging) {
 		this.packaging = packaging;
 	}
-
 
 	public List<UomPicture> getUompictures() {
 		return uompictures;
 	}
 
-
 	public void setUompictures(List<UomPicture> uompictures) {
 		this.uompictures = uompictures;
 	}
 
-
-	public List<ItemUOM> getItemUOMs() {
-		return itemUOMs;
+	public Item getItems() {
+		return items;
 	}
 
-
-	public void setItemUOMs(List<ItemUOM> itemUOMs) {
-		this.itemUOMs = itemUOMs;
+	public void setItems(Item items) {
+		this.items = items;
 	}
-
 
 	public List<UomChannel> getUomChannels() {
 		return uomChannels;
 	}
 
-
 	public void setUomChannels(List<UomChannel> uomChannels) {
 		this.uomChannels = uomChannels;
 	}
-    
 
+	public ManufacturerPricing getManufacturerPricing() {
+		return manufacturerPricing;
+	}
+
+	public void setManufacturerPricing(ManufacturerPricing manufacturerPricing) {
+		this.manufacturerPricing = manufacturerPricing;
+	}
+
+	
     
     
 }

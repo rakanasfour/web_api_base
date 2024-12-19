@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.radol.dto.DisplayPageDTO;
 import com.radol.dto.ItemDTO;
+import com.radol.dto.ManufacturerPricingDTO;
+import com.radol.dto.UomDTO;
 import com.radol.mapper.ItemMapper;
 import com.radol.model.Item;
+import com.radol.model.Uom;
 import com.radol.repository.ItemRepository;
 import com.radol.service.ItemService;
 
@@ -40,13 +43,33 @@ public class ItemServiceImpl implements ItemService {
     }
     
     
-
     @Override
     public ItemDTO findById(Integer id) {
         return itemRepository.findById(id)
                 .map(itemMapper::toDTO)
+                .map(itemDTO -> {
+                    if (itemDTO.getUoms() != null && !itemDTO.getUoms().isEmpty()) {
+                        BigDecimal totalPrice = BigDecimal.ZERO;
+
+                        for (UomDTO uom : itemDTO.getUoms()) {
+                            BigDecimal uomQuantity = BigDecimal.valueOf(uom.getUomQuantity());
+                            ManufacturerPricingDTO manufacturerPricing = uom.getManufacturerPricing();
+
+                            if (manufacturerPricing != null && manufacturerPricing.getPricingList() != null) {
+                                // Multiply uomQuantity by the pricingList field
+                                totalPrice = totalPrice.add(uomQuantity.multiply(manufacturerPricing.getPricingList()));
+                            }
+                        }
+
+                        // Set the total calculated price as the itemBasePrice
+                        itemDTO.setItemBasePrice(totalPrice);
+                    }
+                    return itemDTO;
+                })
                 .orElseThrow(() -> new RuntimeException("Item not found"));
     }
+
+
 
     @Override
     public List<ItemDTO> findAll() {
@@ -67,31 +90,29 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.deleteById(id);
     }
 
-    
-
-    public List<DisplayPageDTO> getDisplayPage() {
-        return itemRepository.getDisplayPage().stream()
+    /*
+    public List<DisplayPageDTO> getDisplayPage(Long itemId) {
+        return itemRepository.getDisplayPage(itemId).stream()
                 .map(displayPage -> {
                     // Calculate total price
                     BigDecimal totalPrice = displayPage.getItemBasePrice()
-                            .multiply(BigDecimal.valueOf(displayPage.getItemUomQuantity()));
+                            .multiply(BigDecimal.valueOf(displayPage.getUomQuantity()));
                     displayPage.setItemBasePrice(totalPrice); // Update the base price
                     
-                    // Calculate total quantity
-                    BigDecimal totalQuantity = BigDecimal.valueOf(displayPage.getItemQuantity())
-                            .multiply(BigDecimal.valueOf(displayPage.getItemUomQuantity()));
-                    displayPage.setItemQuantity(totalQuantity.intValue()); // Update the quantity (convert back to Integer)
-
+                    
                     // Calculate total weight
                     BigDecimal totalWeight = displayPage.getItemWeight()
-                            .multiply(BigDecimal.valueOf(displayPage.getItemUomQuantity()));
+                            .multiply(BigDecimal.valueOf(displayPage.getUomQuantity()));
                     displayPage.setItemWeight(totalWeight); // Update the weight
 
                     return displayPage;
                 })
                 .collect(Collectors.toList());
+                
+               
     }
 
+*/
 	
     
 }

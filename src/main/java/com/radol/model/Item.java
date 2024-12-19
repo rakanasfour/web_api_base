@@ -33,23 +33,11 @@ public class Item {
     @Column(name = "item_description", columnDefinition = "TEXT")
     private String itemDescription;
 
-    @Column(name = "item_type", length = 250)
-    private String itemType;
-
-    @Column(name = "item_quantity")
-    private Integer itemQuantity;
-
     @Column(name = "item_availability", length = 55)
     private String itemAvailability;
 
     @Column(name = "item_msa_promo_item", length = 55)
     private String itemMsaPromoItem;
-
-    @Column(name = "item_base_price", precision = 10, scale = 2, nullable = false)
-    private BigDecimal itemBasePrice;
-
-    @Column(name = "item_weight", precision = 10, scale = 2, nullable = false)
-    private BigDecimal itemWeight;
 
     @Column(name = "item_created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp itemCreatedAt;
@@ -75,201 +63,199 @@ public class Item {
     @OneToMany(mappedBy = "mappedItemSalesCategory", cascade = CascadeType.ALL)
     private List<ItemSalesCategory> itemSalesCategories;
     
-    @OneToMany(mappedBy = "mappedItemUom", cascade = CascadeType.ALL)
-    private List<ItemUOM> itemUOMs;
+    @OneToMany(mappedBy = "items", cascade = CascadeType.ALL)
+    private List<Uom> uoms;
     
-    @OneToMany(mappedBy="item")
+    @OneToMany(mappedBy="itemPItemId")
     private List<ItemPicture> itemPictures;
     
-    @OneToMany(mappedBy="item")
+    
+    @OneToMany(mappedBy="documentSItemId")
     private List<DocumentStorage> documentStorages;
 
-	public Item(Integer itemId, String itemName, String itemSku, String itemDescription, String itemType,
-			Integer itemQuantity, String itemAvailability, String itemMsaPromoItem, BigDecimal itemBasePrice,
-			BigDecimal itemWeight, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
+
+	public Item(Integer itemId, String itemName, String itemSku, String itemDescription, String itemAvailability,
+			String itemMsaPromoItem, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
 			ItemStatus itemStatus, List<ItemAttribute> itemAttributes, List<ItemSalesCategory> itemSalesCategories,
-			List<ItemUOM> itemUOMs, List<ItemPicture> itemPictures, List<DocumentStorage> documentStorages) {
+			List<Uom> uoms, List<ItemPicture> itemPictures, List<DocumentStorage> documentStorages) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
 		this.itemSku = itemSku;
 		this.itemDescription = itemDescription;
-		this.itemType = itemType;
-		this.itemQuantity = itemQuantity;
 		this.itemAvailability = itemAvailability;
 		this.itemMsaPromoItem = itemMsaPromoItem;
-		this.itemBasePrice = itemBasePrice;
-		this.itemWeight = itemWeight;
 		this.itemCreatedAt = itemCreatedAt;
 		this.itemUpdatedAt = itemUpdatedAt;
 		this.itemUpdatedAtBy = itemUpdatedAtBy;
 		this.itemStatus = itemStatus;
 		this.itemAttributes = itemAttributes;
 		this.itemSalesCategories = itemSalesCategories;
-		this.itemUOMs = itemUOMs;
+		this.uoms = uoms;
 		this.itemPictures = itemPictures;
 		this.documentStorages = documentStorages;
 	}
+
 
 	public Item() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public Integer getItemId() {
 		return itemId;
 	}
+
 
 	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 
+
 	public String getItemName() {
 		return itemName;
 	}
+
 
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
 
+
 	public String getItemSku() {
 		return itemSku;
 	}
+
 
 	public void setItemSku(String itemSku) {
 		this.itemSku = itemSku;
 	}
 
+
 	public String getItemDescription() {
 		return itemDescription;
 	}
+
 
 	public void setItemDescription(String itemDescription) {
 		this.itemDescription = itemDescription;
 	}
 
-	public String getItemType() {
-		return itemType;
-	}
-
-	public void setItemType(String itemType) {
-		this.itemType = itemType;
-	}
-
-	public Integer getItemQuantity() {
-		return itemQuantity;
-	}
-
-	public void setItemQuantity(Integer itemQuantity) {
-		this.itemQuantity = itemQuantity;
-	}
 
 	public String getItemAvailability() {
 		return itemAvailability;
 	}
 
+
 	public void setItemAvailability(String itemAvailability) {
 		this.itemAvailability = itemAvailability;
 	}
+
 
 	public String getItemMsaPromoItem() {
 		return itemMsaPromoItem;
 	}
 
+
 	public void setItemMsaPromoItem(String itemMsaPromoItem) {
 		this.itemMsaPromoItem = itemMsaPromoItem;
 	}
 
-	public BigDecimal getItemBasePrice() {
-		return itemBasePrice;
-	}
-
-	public void setItemBasePrice(BigDecimal itemBasePrice) {
-		this.itemBasePrice = itemBasePrice;
-	}
-
-	public BigDecimal getItemWeight() {
-		return itemWeight;
-	}
-
-	public void setItemWeight(BigDecimal itemWeight) {
-		this.itemWeight = itemWeight;
-	}
 
 	public Timestamp getItemCreatedAt() {
 		return itemCreatedAt;
 	}
 
+
 	public void setItemCreatedAt(Timestamp itemCreatedAt) {
 		this.itemCreatedAt = itemCreatedAt;
 	}
+
 
 	public Timestamp getItemUpdatedAt() {
 		return itemUpdatedAt;
 	}
 
+
 	public void setItemUpdatedAt(Timestamp itemUpdatedAt) {
 		this.itemUpdatedAt = itemUpdatedAt;
 	}
+
 
 	public String getItemUpdatedAtBy() {
 		return itemUpdatedAtBy;
 	}
 
+
 	public void setItemUpdatedAtBy(String itemUpdatedAtBy) {
 		this.itemUpdatedAtBy = itemUpdatedAtBy;
 	}
+
 
 	public ItemStatus getItemStatus() {
 		return itemStatus;
 	}
 
+
 	public void setItemStatus(ItemStatus itemStatus) {
 		this.itemStatus = itemStatus;
 	}
+
 
 	public List<ItemAttribute> getItemAttributes() {
 		return itemAttributes;
 	}
 
+
 	public void setItemAttributes(List<ItemAttribute> itemAttributes) {
 		this.itemAttributes = itemAttributes;
 	}
+
 
 	public List<ItemSalesCategory> getItemSalesCategories() {
 		return itemSalesCategories;
 	}
 
+
 	public void setItemSalesCategories(List<ItemSalesCategory> itemSalesCategories) {
 		this.itemSalesCategories = itemSalesCategories;
 	}
 
-	public List<ItemUOM> getItemUOMs() {
-		return itemUOMs;
+
+	public List<Uom> getUoms() {
+		return uoms;
 	}
 
-	public void setItemUOMs(List<ItemUOM> itemUOMs) {
-		this.itemUOMs = itemUOMs;
+
+	public void setUoms(List<Uom> uoms) {
+		this.uoms = uoms;
 	}
+
 
 	public List<ItemPicture> getItemPictures() {
 		return itemPictures;
 	}
 
+
 	public void setItemPictures(List<ItemPicture> itemPictures) {
 		this.itemPictures = itemPictures;
 	}
+
 
 	public List<DocumentStorage> getDocumentStorages() {
 		return documentStorages;
 	}
 
+
 	public void setDocumentStorages(List<DocumentStorage> documentStorages) {
 		this.documentStorages = documentStorages;
 	}
 
-	
 
+    
+    
+    
     
 
 }

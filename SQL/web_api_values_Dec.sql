@@ -65,6 +65,10 @@ VALUES
 INSERT INTO shipping_dimensions (height, width, length, weight) VALUES
 (10.00, 5.00, 5.00, 2.00),
 (15.00, 10.00, 10.00, 5.00),
+(20.00, 15.00, 15.00, 10.00),
+(15.00, 10.00, 10.00, 5.00),
+(20.00, 15.00, 15.00, 10.00),
+(15.00, 10.00, 10.00, 5.00),
 (20.00, 15.00, 15.00, 10.00);
 
 INSERT INTO compliance_categories (compliance_category_name, compliance_categories_code, compliance_category_report_required, compliance_category_pct_item)
@@ -80,18 +84,11 @@ VALUES
 
 
 INSERT INTO manufacturer_pricing (m_pricing_list, m_pricing_msrp, m_pricing_rmap, m_pricing_wholesale_price, m_pricing_federal_excise_tax, m_pricing_cost) VALUES
-(25.00, 30.00, 27.50, 22.50, 0.50, 20.00),
-(15.00, 20.00, 18.00, 13.50, 0.25, 10.00),
-(35.00, 26.00, 56.00, 13.50, 1.25, 14.00),
-(50.00, 60.00, 55.00, 45.00, 2.00, 40.00),
-(10.00, 12.00, 11.00, 9.50, 0.10, 8.00),
-(45.00, 50.00, 48.00, 40.00, 1.75, 35.00),
-(30.00, 35.00, 32.50, 28.00, 0.75, 25.00),
-(20.00, 25.00, 23.00, 18.00, 0.50, 15.00),
-(55.00, 65.00, 60.00, 50.00, 2.50, 45.00),
-(40.00, 45.00, 42.00, 36.00, 1.25, 30.00),
-(18.00, 22.00, 20.00, 16.50, 0.35, 14.00);
-
+(1, 1, 1, 31, 1, 1),
+(2, 2, 2, 32, 2, 2),
+(3, 3, 3, 33, 3, 3),
+(4,4, 4, 34, 4,4),
+(5, 5, 5, 35, 5, 5);
 INSERT INTO manufacturers (manufacturer_name, manufacturer_description, manufacturer_status) 
 VALUES
 ('Global Tech Industries', 'Leading manufacturer of high-tech solutions', 'ACTIVE'),
@@ -187,36 +184,25 @@ VALUES
 ('Smoking Accessories', 'count', 'METRIC');
 
 
-INSERT INTO uoms (uom_type, uom_level, uom_updated_at_by, uom_status, uom_shipping_dimension_id, uom_packaging_id) VALUES
-('Single', 1, 'Admin', 'AVAILABLE', 1, 1),
-('Pack', 2, 'Admin', 'AVAILABLE', 2, 2),
-('Box', 3, 'Admin', 'DISCONTINUED', 3, 3);
-
-INSERT INTO uom_pictures (uom_picture_name, uom_picture_link, uom_picture_uom_id) VALUES
-('Single UOM Picture', 'http://example.com/uom_single.jpg', 1),
-('Pack UOM Picture', 'http://example.com/uom_pack.jpg', 2);
 
 INSERT INTO items (
     item_name, 
     item_sku, 
     item_description, 
-    item_type, 
-    item_quantity, 
     item_availability, 
-    item_msa_promo_item, 
-    item_base_price, 
-    item_weight, 
+    item_msa_promo_item,  
     item_distributor_id, 
     item_model_id, 
     item_manufacturer_pricing_id, 
     item_compliance_category_id
 ) 
 VALUES
-('Acid Blue 1400cc Unit (18)', 'SKU003', 'Description for Acid Blue 1400cc Unit (18)', 'UNIT', 18, 'AVAILABLE', 'Promo3', 45.99, 1.8, 3, 3, 1, 1),
-('Acid Gold Atom Maduro Unit (24)', 'SKU004', 'Description for Acid Gold Atom Maduro Unit (24)', 'UNIT', 24, 'AVAILABLE', 'Promo4', 55.99, 2.4, 3, 3, 2, 2),
-('Acid Blue Blondie Unit (40)', 'SKU005', 'Description for Acid Blue Blondie Unit (40)', 'UNIT', 40, 'AVAILABLE', 'Promo5', 35.99, 4.0, 4, 4, 3, 3),
-('Acid Blue Blondie Belicoso Unit (24)', 'SKU006', 'Description for Acid Blue Blondie Belicoso Unit (24)', 'UNIT', 24, 'AVAILABLE', 'Promo6', 29.99, 2.4, 4, 4, 4, 4),
-('Acid Blue Blondie Maduro Unit (40)', 'SKU007', 'Description for Acid Blue Blondie Maduro Unit (40)', 'UNIT', 40, 'AVAILABLE', 'Promo7', 39.99, 4.0, 5, 5, 5, 5);
+('Captain black', 'SKU001', 'Description Captain black unit(1)', 'AVAILABLE', 'Promo3', 1, 1, 1, 1),
+('winston LIGHT', 'SKU002', 'Description for winston unit(20)', 'AVAILABLE', 'Promo4',  2, 2, 2, 2),
+('LM RED', 'SKU003', 'Description for LM unit(20)', 'AVAILABLE', 'Promo5', 3, 3, 3, 3),
+('Malboroe LIGTH', 'SKU004', 'Description for Malboroe single (20)', 'AVAILABLE', 'Promo6', 4, 4, 4, 4),
+('Malboroe RED', 'SKU007', 'Malboroe box box(45)', 'AVAILABLE', 'Promo7', 5, 5, 5, 5);
+
 
 INSERT INTO item_pictures (item_picture_main, item_p_item_id) 
 VALUES
@@ -227,6 +213,23 @@ VALUES
 ('https://as1.ftcdn.net/v2/jpg/00/44/83/14/1000_F_44831410_ZYORjO4MklXQaMnILgP1biJ0JyhwclS2.jpg', 5);
 
 
+INSERT INTO uoms (uom_type,uom_sub_type,uom_quantity,uom_level,uom_weight, uom_updated_at_by, uom_status, uom_shipping_dimension_id, uom_packaging_id,uom_item_id,uom_manufacturer_pricing_id) VALUES
+('SINGLE','Single',1, 1, 0.2,'Admin', 'AVAILABLE', 1, 1,1,1),
+('UNIT','Single',15, 5, 1.2,'Admin', 'AVAILABLE', 2, 2,1,2),
+('CASE','pack',25, 6, 12,'Admin', 'AVAILABLE', 3, 3,1,3),
+('PALLET','Single',1, 10,33, 'Admin', 'AVAILABLE', 1, 1,1,4),
+('SINGLE','Single',1, 1, 0.4,'Admin', 'AVAILABLE', 1, 1,2,1),
+('UNIT','Single',15, 5, 1.4,'Admin', 'AVAILABLE', 2, 2,2,2),
+('CASE','pack',25, 6, 7,'Admin', 'AVAILABLE', 3, 3,2,3),
+('PALLET','Single',1, 10, 12,'Admin', 'AVAILABLE', 1, 1,2,4)
+
+;
+
+INSERT INTO uom_pictures (uom_picture_name, uom_picture_link, uom_picture_uom_id) VALUES
+('Single UOM Picture', 'http://example.com/uom_single.jpg', 1),
+('Pack UOM Picture', 'http://example.com/uom_pack.jpg', 2);
+
+
 INSERT INTO document_storage (document_storage_1, document_s_item_id) 
 VALUES
 ('Cigar Aging and Storage Guide', 1),
@@ -235,31 +238,20 @@ VALUES
 ('Tips for Storing Cigars in a Humidor', 4),
 ('How to Maintain Ideal Conditions for Cigar Freshness', 5);
 
-INSERT INTO items_uoms (item_uom_quantity, item_uom_item_id, item_uom_uom_id) 
-VALUES
-(18, 1, 1),  -- Item 1 associated with Single UOM
-(18, 1, 2),  -- Item 1 associated with Single UOM
-(18, 1, 3),  -- Item 1 associated with Single UOM
-(24, 2, 3),  -- Item 2 associated with Pack UOM
-(40, 3, 1),  -- Item 3 associated with Single UOM
-(24, 4, 2),  -- Item 4 associated with Pack UOM
-(24, 4, 3),  -- Item 4 associated with Pack UOM
-(40, 5, 1),  -- Item 5 associated with Box UOM
-(40, 5, 3);  -- Item 5 associated with Box UOM
 
-INSERT INTO items_channels (item_ch_channel_id, item_ch_item_id)
+
+
+
+INSERT INTO uoms_channels (uom_ch_channel_id, uom_ch_uom_id)
 VALUES
 (1, 1),  -- Item 1 available to Retail Customer
 (1, 2),  -- Item 1 available to Retail Customer
 (1, 3),  -- Item 1 available to Retail Customer
-(1, 4),  -- Item 1 available to Retail Customer
-(1, 5),  -- Item 1 available to Retail Customer
+
 (2, 1),  -- Item 2 available to Wholesaler
 (2, 2),  -- Item 2 available to Wholesaler
-(2, 5),  -- Item 2 available to Wholesaler
 (3, 3),  -- Item 3 available to Dropshipper
-(3, 2),  -- Item 3 available to Dropshipper
-(3, 5);  -- Item 5 available to Wholesaler
+(3, 2); -- Item 3 available to Dropshipper
 
 INSERT INTO items_attributes (item_a_item_id, item_a_attribute_id)
 VALUES
@@ -271,8 +263,7 @@ VALUES
 (2, 4),  -- Item 2 associated with attribute 'Smooth'
 (2, 5),  -- Item 2 associated with attribute 'Smooth'
 (3, 5),  -- Item 3 associated with attribute 'Large'
-(4, 8),  -- Item 4 associated with attribute 'Bold'
-(5, 10); -- Item 5 associated with attribute 'Earthy'
+(4, 8);  -- Item 4 associated with attribute 'Bold'
 
 INSERT INTO item_sales_categories (item_s_c_item, item_s_c_category_id)
 VALUES
@@ -286,5 +277,6 @@ VALUES
 (3, 3),  -- Item 3 categorized as Pipe Tobacco
 (4, 4),  -- Item 4 categorized as Chewing Tobacco
 (5, 5);  -- Item 5 categorized as Cigarette
+
 
 

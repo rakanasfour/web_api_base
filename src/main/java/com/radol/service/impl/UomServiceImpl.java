@@ -40,8 +40,8 @@ public class UomServiceImpl implements UomService {
         Uom uom = uomMapper.toEntity(dto);
         
      // Process channels and create ItemChannel entries
-        if (dto.getChannels() != null && !dto.getChannels().isEmpty()) {
-            List<UomChannel> uomChannels = dto.getChannels().stream().map(channelDto -> {
+        if (dto.getUomChannels() != null && !dto.getUomChannels().isEmpty()) {
+            List<UomChannel> uomChannels = dto.getUomChannels().stream().map(channelDto -> {
                 Channel channel = channelRepository.findById(channelDto.getChannelId())
                         .orElseThrow(() -> new RuntimeException("Channel not found"));
                 UomChannel uomChannel = new UomChannel();

@@ -24,30 +24,46 @@ public class ItemPicture {
     // Many-to-one relationship with Item
     @ManyToOne
     @JoinColumn(name = "item_p_item_id", referencedColumnName = "item_id", nullable = false)
-    private Item item;
+    private Item itemPItemId;
 
-    // Getters and Setters
-    public Integer getItemPictureId() {
-        return itemPictureId;
-    }
+	public ItemPicture(Integer itemPictureId, String itemPictureMain, Item itemPItemId) {
+		super();
+		this.itemPictureId = itemPictureId;
+		this.itemPictureMain = itemPictureMain;
+		this.itemPItemId = itemPItemId;
+	}
 
-    public void setItemPictureId(Integer itemPictureId) {
-        this.itemPictureId = itemPictureId;
-    }
+	public ItemPicture() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public String getItemPictureMain() {
-        return itemPictureMain;
-    }
+	public Integer getItemPictureId() {
+		return itemPictureId;
+	}
 
-    public void setItemPictureMain(String itemPictureMain) {
-        this.itemPictureMain = itemPictureMain;
-    }
+	public void setItemPictureId(Integer itemPictureId) {
+		this.itemPictureId = itemPictureId;
+	}
 
-    public Item getItem() {
-        return item;
-    }
+	public String getItemPictureMain() {
+		return itemPictureMain;
+	}
 
-    public void setItem(Item item) {
-        this.item = item;
-    }
+	public void setItemPictureMain(String itemPictureMain) {
+		this.itemPictureMain = itemPictureMain;
+	}
+
+	public Item getItemPItemId() {
+		return itemPItemId;
+	}
+
+	public void setItemPItemId(Item itemPItemId) {
+		this.itemPItemId = itemPItemId;
+	}
+
+    
+    
+
+  
 }
