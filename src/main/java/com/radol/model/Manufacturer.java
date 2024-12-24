@@ -1,8 +1,10 @@
 package com.radol.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -44,15 +46,12 @@ public class Manufacturer {
     @Column(name = "manufacturer_updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private Timestamp manufacturerUpdatedAt;
     
-    @OneToMany(mappedBy="manufacturer")
-    private List<ManufacturerFacility> manufacturerFacility;
-    
-    @OneToMany(mappedBy="manufacturer")
-    private List<Brand> brand;
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ManufacturerFacility> manufacturerFacilities = new ArrayList<>();
 
 	public Manufacturer(Integer manufacturerId, String manufacturerName, String manufacturerDescription,
 			ManufacturerStatus manufacturerStatus, Timestamp manufacturerCreatedAt, Timestamp manufacturerUpdatedAt,
-			List<ManufacturerFacility> manufacturerFacility, List<Brand> brand) {
+			List<ManufacturerFacility> manufacturerFacilities) {
 		super();
 		this.manufacturerId = manufacturerId;
 		this.manufacturerName = manufacturerName;
@@ -60,8 +59,7 @@ public class Manufacturer {
 		this.manufacturerStatus = manufacturerStatus;
 		this.manufacturerCreatedAt = manufacturerCreatedAt;
 		this.manufacturerUpdatedAt = manufacturerUpdatedAt;
-		this.manufacturerFacility = manufacturerFacility;
-		this.brand = brand;
+		this.manufacturerFacilities = manufacturerFacilities;
 	}
 
 	public Manufacturer() {
@@ -117,26 +115,15 @@ public class Manufacturer {
 		this.manufacturerUpdatedAt = manufacturerUpdatedAt;
 	}
 
-	public List<ManufacturerFacility> getManufacturerFacility() {
-		return manufacturerFacility;
+	public List<ManufacturerFacility> getManufacturerFacilities() {
+		return manufacturerFacilities;
 	}
 
-	public void setManufacturerFacility(List<ManufacturerFacility> manufacturerFacility) {
-		this.manufacturerFacility = manufacturerFacility;
-	}
-
-	public List<Brand> getBrand() {
-		return brand;
-	}
-
-	public void setBrand(List<Brand> brand) {
-		this.brand = brand;
-	}
-
-	
+	public void setManufacturerFacilities(List<ManufacturerFacility> manufacturerFacilities) {
+		this.manufacturerFacilities = manufacturerFacilities;
+	} ;
     
 
-	
     
     
 }

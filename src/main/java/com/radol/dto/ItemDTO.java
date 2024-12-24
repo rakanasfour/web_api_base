@@ -1,10 +1,11 @@
 package com.radol.dto;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.radol.model.Item.ItemStatus;
+import com.radol.model.Model;
 
 public class ItemDTO {
 
@@ -14,18 +15,15 @@ public class ItemDTO {
     private String itemDescription;
     private String itemAvailability;
     private String itemMsaPromoItem;
-    private BigDecimal itemBasePrice;
-    private BigDecimal itemWeight;
     private Timestamp itemCreatedAt;
     private Timestamp itemUpdatedAt;
     private String itemUpdatedAtBy;
     private ItemStatus itemStatus;
-    private Integer distributor;
-    private Integer model;
+    private Integer modelId;
     private Integer complianceCategory;
     private List<ItemPictureDTO> itemPictures;
     private List<ChannelDTO> channels;
-    private List<AttributeDTO>attributes;
+    private List<AttributeDTO>attributes = new ArrayList<>();
     private List<SalesCategoryDTO> salesCategories;
     
     private List<UomDTO> uoms;
@@ -35,11 +33,10 @@ public class ItemDTO {
 
 
 	public ItemDTO(Integer itemId, String itemName, String itemSku, String itemDescription, String itemAvailability,
-			String itemMsaPromoItem, BigDecimal itemBasePrice, BigDecimal itemWeight, Timestamp itemCreatedAt,
-			Timestamp itemUpdatedAt, String itemUpdatedAtBy, ItemStatus itemStatus, Integer distributor, Integer model,
-			Integer complianceCategory, List<ItemPictureDTO> itemPictures, List<ChannelDTO> channels,
-			List<AttributeDTO> attributes, List<SalesCategoryDTO> salesCategories, List<UomDTO> uoms,
-			List<DocumentStorageDTO> documentStorages) {
+			String itemMsaPromoItem, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
+			ItemStatus itemStatus, Integer modelId, Integer complianceCategory, List<ItemPictureDTO> itemPictures,
+			List<ChannelDTO> channels, List<AttributeDTO> attributes, List<SalesCategoryDTO> salesCategories,
+			List<UomDTO> uoms, List<DocumentStorageDTO> documentStorages) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -47,14 +44,11 @@ public class ItemDTO {
 		this.itemDescription = itemDescription;
 		this.itemAvailability = itemAvailability;
 		this.itemMsaPromoItem = itemMsaPromoItem;
-		this.itemBasePrice = itemBasePrice;
-		this.itemWeight = itemWeight;
 		this.itemCreatedAt = itemCreatedAt;
 		this.itemUpdatedAt = itemUpdatedAt;
 		this.itemUpdatedAtBy = itemUpdatedAtBy;
 		this.itemStatus = itemStatus;
-		this.distributor = distributor;
-		this.model = model;
+		this.modelId = modelId;
 		this.complianceCategory = complianceCategory;
 		this.itemPictures = itemPictures;
 		this.channels = channels;
@@ -131,26 +125,6 @@ public class ItemDTO {
 	}
 
 
-	public BigDecimal getItemBasePrice() {
-		return itemBasePrice;
-	}
-
-
-	public void setItemBasePrice(BigDecimal itemBasePrice) {
-		this.itemBasePrice = itemBasePrice;
-	}
-
-
-	public BigDecimal getItemWeight() {
-		return itemWeight;
-	}
-
-
-	public void setItemWeight(BigDecimal itemWeight) {
-		this.itemWeight = itemWeight;
-	}
-
-
 	public Timestamp getItemCreatedAt() {
 		return itemCreatedAt;
 	}
@@ -191,23 +165,13 @@ public class ItemDTO {
 	}
 
 
-	public Integer getDistributor() {
-		return distributor;
+	public Integer getModelId() {
+		return modelId;
 	}
 
 
-	public void setDistributor(Integer distributor) {
-		this.distributor = distributor;
-	}
-
-
-	public Integer getModel() {
-		return model;
-	}
-
-
-	public void setModel(Integer model) {
-		this.model = model;
+	public void setModelId(Integer modelId) {
+		this.modelId = modelId;
 	}
 
 
@@ -281,10 +245,8 @@ public class ItemDTO {
 	}
 
 
-    
-    
 	
- 
+    
     
    
 }

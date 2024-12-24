@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ItemDTO;
+import com.radol.dto.ItemRequestDTO;
 import com.radol.service.ItemService;
 
 @RestController
@@ -61,5 +62,10 @@ public class ItemController implements CrudController<ItemDTO, Integer> {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
+    @PostMapping("/request")
+    public ResponseEntity<ItemDTO> sendRequest(@RequestBody ItemRequestDTO dto) {
+        ItemDTO item = itemService.saveItemRequest(dto);
+        return new ResponseEntity<>(item, HttpStatus.CREATED);
+    }
 
 }

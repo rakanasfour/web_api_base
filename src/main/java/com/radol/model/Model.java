@@ -38,16 +38,21 @@ public class Model {
     
     @OneToMany(mappedBy="model")
     private List<ModelPicture> modelPictures;
+    
+    
+    @OneToMany(mappedBy="model")
+    private List<Item> items;
 
 
 	public Model(Integer modelId, String modelName, String modelDescription, Brand brand,
-			List<ModelPicture> modelPictures) {
+			List<ModelPicture> modelPictures, List<Item> items) {
 		super();
 		this.modelId = modelId;
 		this.modelName = modelName;
 		this.modelDescription = modelDescription;
 		this.brand = brand;
 		this.modelPictures = modelPictures;
+		this.items = items;
 	}
 
 
@@ -105,6 +110,19 @@ public class Model {
 	public void setModelPictures(List<ModelPicture> modelPictures) {
 		this.modelPictures = modelPictures;
 	}
+
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+
+	
     
     
     

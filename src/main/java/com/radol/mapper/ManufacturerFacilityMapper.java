@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 import com.radol.dto.ManufacturerFacilityDTO;
 import com.radol.model.ManufacturerFacility;
 
-@Mapper(componentModel = "spring", uses= {ManufacturerMapper.class})
+@Mapper(componentModel = "spring")
 public interface ManufacturerFacilityMapper extends EntityMapper<ManufacturerFacilityDTO, ManufacturerFacility> {
 
 		

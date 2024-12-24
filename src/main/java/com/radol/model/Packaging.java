@@ -1,8 +1,7 @@
 package com.radol.model;
 
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +10,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,13 +29,19 @@ public class Packaging {
     
 
     public enum PackagingType {
-        SINGLE,
-        TIN,
-        BUNDLE, 
-        PACK,
-        BOX,
-        CASE,
-        PALLET
+    	BAG,
+    	BOTTLE,
+    	BOX,
+    	BUNNDLE,
+    	CAN,
+    	HUMIBAG,
+    	JAR,
+    	PACK,
+    	POUCH,
+    	SKID,
+    	STICK,
+    	TIN
+        
     }
 
 

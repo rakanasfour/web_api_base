@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.radol.dto.DisplayPageDTO;
 import com.radol.model.Item;
 
 @Repository
@@ -54,14 +53,35 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
 		       "WHERE u.uomLevel < 5 AND u IS NOT NULL AND i.itemId = :id")
-		Item findByIdQueryCustomer(@Param("id") Integer id);
+		Item findByIdCustomer(@Param("id") Integer id);
 	
 	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
 		       "WHERE u.uomLevel < 7 AND u.uomLevel > 4 AND u IS NOT NULL AND i.itemId = :id")
-		Item findByIdQueryRetail(@Param("id") Integer id);
+		Item findByIdRetail(@Param("id") Integer id);
 	
-	
+	//find by id
 	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
 		       "WHERE u.uomLevel < 11 AND u.uomLevel > 4 AND u IS NOT NULL AND i.itemId = :id")
-		Item findByIdQueryWholeSale(@Param("id") Integer id);
+		Item findByIdWholeSale(@Param("id") Integer id);
+	
+	
+	//find by name
+	
+	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
+		       "WHERE u.uomLevel < 5 AND u IS NOT NULL AND i.itemName = :itemName")
+	List<Item> findByItemNameCustomer(@Param("itemName")String itemName);
+
+	
+	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
+		       "WHERE u.uomLevel < 7 AND u.uomLevel > 4 AND u IS NOT NULL AND i.itemName = :itemName")
+    List<Item> findByItemNameRetail(@Param("itemName")String itemName);
+	
+
+    
+	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
+		       "WHERE u.uomLevel < 11 AND u.uomLevel > 4 AND u IS NOT NULL AND i.itemName = :itemName")
+    List<Item> findByItemNameWholeSale(@Param("itemName")String itemName);
+
+	
+	
 }

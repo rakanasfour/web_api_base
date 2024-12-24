@@ -41,8 +41,6 @@ public interface ItemSalesCategoryMapper extends EntityMapper<ItemSalesCategoryD
 			
 			 @InheritInverseConfiguration
 			 ItemSalesCategory toAttributeEntity(SalesCategoryDTO salesCategoryDTO);
-			
-
 }
 
 

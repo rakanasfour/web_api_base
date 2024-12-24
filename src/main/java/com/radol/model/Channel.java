@@ -37,8 +37,8 @@ public class Channel {
 
     public enum ChannelUOM {
         SINGLE,
-        PACK,
-        BOX,
+        SUB_UNIT,
+        UNIT,
         CASE,
         PALLET
     }

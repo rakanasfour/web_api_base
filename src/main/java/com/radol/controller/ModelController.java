@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ModelDTO;
+import com.radol.dto.ModelRequestDTO;
 import com.radol.service.ModelService;
 
 @RestController
@@ -59,5 +60,12 @@ public class ModelController implements CrudController<ModelDTO, Integer> {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         modelService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    
+    @PostMapping("/request")
+    public ResponseEntity<ModelDTO> sendRequest(@RequestBody ModelRequestDTO dto) {
+        ModelDTO model = modelService.saveModelRequest(dto);
+        return new ResponseEntity<>(model, HttpStatus.CREATED);
     }
 }

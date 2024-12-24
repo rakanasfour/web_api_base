@@ -30,13 +30,7 @@ VALUES
 
 
 INSERT INTO packaging (packaging_type) VALUES
-('SINGLE'),
-('TIN'),
-('BUNDLE'),
-('PACK'),
-('BOX'),
-('CASE'),
-('PALLET');
+('BAG'),('BOTTLE'),('BOX'),('BUNNDLE'),('CAN'), ('HUMIBAG'), ('JAR'),('PACK'),('POUCH'),('SKID'),('STICK'),('TIN');
 
 
 INSERT INTO channels (channel_description, channels_level, channel_default_uom) VALUES
@@ -69,7 +63,8 @@ INSERT INTO shipping_dimensions (height, width, length, weight) VALUES
 (15.00, 10.00, 10.00, 5.00),
 (20.00, 15.00, 15.00, 10.00),
 (15.00, 10.00, 10.00, 5.00),
-(20.00, 15.00, 15.00, 10.00);
+(20.00, 15.00, 15.00, 10.00),
+(21.00, 5.20, 15.30, 10.40);
 
 INSERT INTO compliance_categories (compliance_category_name, compliance_categories_code, compliance_category_report_required, compliance_category_pct_item)
 VALUES
@@ -129,23 +124,23 @@ VALUES
 ('Facility O', 'Italy', 'ACTIVE', 3);
 
 
-INSERT INTO brands (brand_name, brand_description, brand_status, brand_manufacturer_id) 
+INSERT INTO brands (brand_name, brand_description, brand_status, brand_manufacturer_id, brand_distributor_id) 
 VALUES
-('Brand A', 'Description for Brand A', 'AVAILABLE', 1),
-('Brand B', 'Description for Brand B', 'AVAILABLE', 1),
-('Brand C', 'Description for Brand C', 'DISCONTINUED', 2),
-('Brand D', 'Description for Brand D', 'AVAILABLE', 2),
-('Brand E', 'Description for Brand E', 'DISCONTINUED', 3),
-('Brand F', 'Description for Brand F', 'AVAILABLE', 3),
-('Brand G', 'Description for Brand G', 'DISCONTINUED', 4),
-('Brand H', 'Description for Brand H', 'AVAILABLE', 4),
-('Brand I', 'Description for Brand I', 'DISCONTINUED', 5),
-('Brand J', 'Description for Brand J', 'AVAILABLE', 5),
-('Brand K', 'Description for Brand K', 'DISCONTINUED', 6),
-('Brand L', 'Description for Brand L', 'AVAILABLE', 6),
-('Brand M', 'Description for Brand M', 'DISCONTINUED', 7),
-('Brand N', 'Description for Brand N', 'AVAILABLE', 7),
-('Brand O', 'Description for Brand O', 'AVAILABLE', 8);
+('Brand A', 'Description for Brand A', 'AVAILABLE', 1,1),
+('Brand B', 'Description for Brand B', 'AVAILABLE', 1,3),
+('Brand C', 'Description for Brand C', 'DISCONTINUED', 2,3),
+('Brand D', 'Description for Brand D', 'AVAILABLE', 2,2),
+('Brand E', 'Description for Brand E', 'DISCONTINUED', 3,3),
+('Brand F', 'Description for Brand F', 'AVAILABLE', 3,2),
+('Brand G', 'Description for Brand G', 'DISCONTINUED', 4,2),
+('Brand H', 'Description for Brand H', 'AVAILABLE', 4,3),
+('Brand I', 'Description for Brand I', 'DISCONTINUED', 5,3),
+('Brand J', 'Description for Brand J', 'AVAILABLE', 5,3),
+('Brand K', 'Description for Brand K', 'DISCONTINUED', 6,1),
+('Brand L', 'Description for Brand L', 'AVAILABLE', 6,3),
+('Brand M', 'Description for Brand M', 'DISCONTINUED', 7,2),
+('Brand N', 'Description for Brand N', 'AVAILABLE', 7,2),
+('Brand O', 'Description for Brand O', 'AVAILABLE', 8,2);
 
 
 INSERT INTO models (model_name, model_description, model_brand_id, model_manufacturer_facility_id)
@@ -185,24 +180,49 @@ VALUES
 
 
 
+
+INSERT INTO classes (class_name) VALUES
+('Full-Bodied'),
+('Medium-Bodied'),
+('Mild-Bodied'),
+('Natural Wrapper'),
+('Maduro Wrapper'),
+('Habano Wrapper'),
+('Dominican Origin'),
+('Nicaraguan Origin'),
+('Connecticut Wrapper');
+
+INSERT INTO attribute_class (attribute_class_attribute_id, attribute_class_class_id) VALUES
+(1, 1), 
+(2, 2), 
+(3, 3), 
+(4, 4),
+(5, 5), 
+(6, 6), 
+(7, 7), 
+(8, 8), 
+(9, 9);
+
+
+
 INSERT INTO items (
     item_name, 
     item_sku, 
     item_description, 
     item_availability, 
     item_msa_promo_item,  
-    item_distributor_id, 
     item_model_id, 
     item_manufacturer_pricing_id, 
     item_compliance_category_id
 ) 
 VALUES
-('Captain black', 'SKU001', 'Description Captain black unit(1)', 'AVAILABLE', 'Promo3', 1, 1, 1, 1),
-('winston LIGHT', 'SKU002', 'Description for winston unit(20)', 'AVAILABLE', 'Promo4',  2, 2, 2, 2),
-('LM RED', 'SKU003', 'Description for LM unit(20)', 'AVAILABLE', 'Promo5', 3, 3, 3, 3),
-('Malboroe LIGTH', 'SKU004', 'Description for Malboroe single (20)', 'AVAILABLE', 'Promo6', 4, 4, 4, 4),
-('Malboroe RED', 'SKU007', 'Malboroe box box(45)', 'AVAILABLE', 'Promo7', 5, 5, 5, 5);
+('Captain black', 'SKU001', 'Description Captain black unit(1)', 'AVAILABLE', 'Promo3', 1, 1, 1),
+('winston LIGHT', 'SKU002', 'Description for winston unit(20)', 'AVAILABLE', 'Promo4', 2, 2, 2),
+('LM RED', 'SKU003', 'Description for LM unit(20)', 'AVAILABLE', 'Promo5', 3, 3, 3),
+('Malboroe LIGTH', 'SKU004', 'Description for Malboroe single (20)', 'AVAILABLE', 'Promo6', 4, 4, 4),
+('Malboroe RED', 'SKU007', 'Malboroe box box(45)', 'AVAILABLE', 'Promo7', 5, 5, 5);
 
+select * from items;
 
 INSERT INTO item_pictures (item_picture_main, item_p_item_id) 
 VALUES
@@ -214,14 +234,14 @@ VALUES
 
 
 INSERT INTO uoms (uom_type,uom_sub_type,uom_quantity,uom_level,uom_weight, uom_updated_at_by, uom_status, uom_shipping_dimension_id, uom_packaging_id,uom_item_id,uom_manufacturer_pricing_id) VALUES
-('SINGLE','Single',1, 1, 0.2,'Admin', 'AVAILABLE', 1, 1,1,1),
-('UNIT','Single',15, 5, 1.2,'Admin', 'AVAILABLE', 2, 2,1,2),
-('CASE','pack',25, 6, 12,'Admin', 'AVAILABLE', 3, 3,1,3),
-('PALLET','Single',1, 10,33, 'Admin', 'AVAILABLE', 1, 1,1,4),
-('SINGLE','Single',1, 1, 0.4,'Admin', 'AVAILABLE', 1, 1,2,1),
-('UNIT','Single',15, 5, 1.4,'Admin', 'AVAILABLE', 2, 2,2,2),
-('CASE','pack',25, 6, 7,'Admin', 'AVAILABLE', 3, 3,2,3),
-('PALLET','Single',1, 10, 12,'Admin', 'AVAILABLE', 1, 1,2,4)
+('SINGLE','SINGLE',1, 1, 0.2,'Admin', 'AVAILABLE', 1, 1,1,1),
+('UNIT','SINGLE',15, 5, 1.2,'Admin', 'AVAILABLE', 2, 2,1,2),
+('CASE','UNIT',25, 6, 12,'Admin', 'AVAILABLE', 3, 3,1,3),
+('PALLET','SINGLE',1, 10,33, 'Admin', 'AVAILABLE', 4, 1,1,4),
+('SINGLE','SINGLE',1, 1, 0.4,'Admin', 'AVAILABLE', 5, 1,2,1),
+('UNIT','SINGLE',15, 5, 1.4,'Admin', 'AVAILABLE', 6, 2,2,2),
+('CASE','UNIT',25, 6, 7,'Admin', 'AVAILABLE', 7, 7,2,3),
+('PALLET','SINGLE',1, 10, 12,'Admin', 'AVAILABLE', 8, 1,2,4)
 
 ;
 

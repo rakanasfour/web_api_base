@@ -25,12 +25,12 @@ public class Uom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "uom_id" , columnDefinition = "INT UNSIGNED")
     private Integer uomId;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "uom_type", length = 50, nullable = false)
-    private String uomType;
-    
+    private UomType uomType;
+    @Enumerated(EnumType.STRING)
     @Column(name = "uom_sub_type", nullable = false)
-    private String uomSubType;
+    private UomType uomSubType;
     
     @Column(name = "uom_quantity", nullable = false)
     private Integer uomQuantity;
@@ -57,6 +57,14 @@ public class Uom {
         AVAILABLE,
         NOTAVAILABLE,
         DISCONTINUED
+    }
+    
+    public enum UomType {
+        SINGLE,
+        SUB_UNIT,
+        UNIT,
+        CASE,
+        PALLET
     }
     
 
@@ -90,7 +98,7 @@ public class Uom {
     @JoinColumn(name = "uom_manufacturer_pricing_id", referencedColumnName = "m_pricing_id", unique = true)
     private ManufacturerPricing manufacturerPricing;
 
-	public Uom(Integer uomId, String uomType, String uomSubType, Integer uomQuantity, BigDecimal uomWeight,
+	public Uom(Integer uomId, UomType uomType, UomType uomSubType, Integer uomQuantity, BigDecimal uomWeight,
 			Integer uomLevel, Timestamp uomCreatedAt, Timestamp uomUpdatedAt, String uomUpdatedAtBy,
 			UomStatus uomStatus, String uomManufacturerBarcode, String uomInternalBarcode,
 			ShippingDimension shippingDimension, Packaging packaging, List<UomPicture> uompictures, Item items,
@@ -129,19 +137,19 @@ public class Uom {
 		this.uomId = uomId;
 	}
 
-	public String getUomType() {
+	public UomType getUomType() {
 		return uomType;
 	}
 
-	public void setUomType(String uomType) {
+	public void setUomType(UomType uomType) {
 		this.uomType = uomType;
 	}
 
-	public String getUomSubType() {
+	public UomType getUomSubType() {
 		return uomSubType;
 	}
 
-	public void setUomSubType(String uomSubType) {
+	public void setUomSubType(UomType uomSubType) {
 		this.uomSubType = uomSubType;
 	}
 

@@ -45,14 +45,19 @@ public class Attribute {
     private List<ItemAttribute> itemAttributes;
 
 
+    @OneToMany(mappedBy = "mappedAttributeClass", cascade = CascadeType.ALL)
+    private List<AttributeClass> attributeClasses;
+
+
 	public Attribute(int attributeId, String attributeName, AttributeType attributeType, String attributeAssistText,
-			List<ItemAttribute> itemAttributes) {
+			List<ItemAttribute> itemAttributes, List<AttributeClass> attributeClasses) {
 		super();
 		this.attributeId = attributeId;
 		this.attributeName = attributeName;
 		this.attributeType = attributeType;
 		this.attributeAssistText = attributeAssistText;
 		this.itemAttributes = itemAttributes;
+		this.attributeClasses = attributeClasses;
 	}
 
 
@@ -112,8 +117,17 @@ public class Attribute {
 	}
 
 
+	public List<AttributeClass> getAttributeClasses() {
+		return attributeClasses;
+	}
+
+
+	public void setAttributeClasses(List<AttributeClass> attributeClasses) {
+		this.attributeClasses = attributeClasses;
+	}
+
+
     
-	
     
     
 }

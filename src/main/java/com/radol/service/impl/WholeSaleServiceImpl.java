@@ -33,44 +33,19 @@ public class WholeSaleServiceImpl {
    
 
     public ItemDTO findByIdWholeSale(Integer id) {
-        return Optional.ofNullable(itemRepository.findByIdQueryWholeSale(id)) // Handle null from query
+        return Optional.ofNullable(itemRepository.findByIdWholeSale(id)) // Handle null from query
                 .map(itemMapper::toDTO)
-                .map(itemDTO -> {
-                    if (itemDTO.getUoms() != null && !itemDTO.getUoms().isEmpty()) {
-                        BigDecimal totalPrice = BigDecimal.ZERO;
 
-                        for (UomDTO uom : itemDTO.getUoms()) {
-                            BigDecimal uomQuantity = BigDecimal.valueOf(uom.getUomQuantity());
-                            ManufacturerPricingDTO manufacturerPricing = uom.getManufacturerPricing();
-
-                            if (manufacturerPricing != null && manufacturerPricing.getPricingList() != null) {
-                                totalPrice = totalPrice.add(uomQuantity.multiply(manufacturerPricing.getPricingList()));
-                            }
-                        }
-
-                        itemDTO.setItemBasePrice(totalPrice); // Set the calculated price
-                    }
-                    return itemDTO;
-                })
                 .orElseThrow(() -> new RuntimeException("Item not found"));
     }
-
-/*
-    public List<ItemDTO> findAll() {
-        return itemRepository.findAll().stream()
-                .filter(item -> item.getUoms() != null && !item.getUoms().isEmpty()) // Skip items without uoms
-                .map(item -> {
-                    // Filter uoms with uomLevel < 5
-                    item.setUoms(
-                        item.getUoms().stream()
-                            .filter(uom -> uom.getUomLevel() < 5)
-                            .collect(Collectors.toList())
-                    );
-                    return itemMapper.toDTO(item); // Convert to DTO
-                })
+    
+    public List<ItemDTO> searchByItemName(String itemName) {
+        return itemRepository.findByItemNameWholeSale(itemName).stream()
+                .map(itemMapper::toDTO)
                 .collect(Collectors.toList());
     }
-    */
+    
+
     
     public List<ItemDTO> findAll() {
         return itemRepository.findUomLevelBelowElevenWholeSale().stream()

@@ -1,7 +1,7 @@
 
-Drop database web_api_cigarette;
-CREATE DATABASE web_api_cigarette;
-use web_api_cigarette;
+Drop database web_api_base;
+CREATE DATABASE web_api_base;
+use web_api_base;
 
 # this is just for the users who can access the system 
 CREATE TABLE users (
@@ -40,14 +40,14 @@ INDEX (distributor_name)
 #one to many with u/m 
 CREATE TABLE packaging (
     packaging_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    packaging_type ENUM('SINGLE','TIN','BUNDLE','PACK','BOX', 'CASE', 'PALLET') NOT NULL
+    packaging_type ENUM('BAG','BOTTLE','BOX','BUNNDLE','CAN', 'HUMIBAG', 'JAR','PACK','POUCH','SKID','STICK','TIN') NOT NULL
 );
 
 create table channels (
 channel_id int UNSIGNED primary key auto_increment,
 channel_description varchar(250),
 channels_level int, 
-channel_default_uom ENUM('SINGLE','PACK','BOX', 'CASE', 'PALLET') NOT NULL
+channel_default_uom ENUM('SINGLE','SUB_UNIT','UNIT', 'CASE', 'PALLET') NOT NULL
 );
 #many to many with item table(we will have junction table)
 create table attributes(
@@ -118,9 +118,12 @@ CREATE TABLE brands (
     brand_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     brand_manufacturer_id INT UNSIGNED NOT NULL,  -- Many-to-one relationship with manufacturers
     FOREIGN KEY (brand_manufacturer_id) REFERENCES manufacturers(manufacturer_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    brand_distributor_id int unsigned,
+    FOREIGN KEY (brand_distributor_id) REFERENCES distributors(distributor_id),
     INDEX (brand_manufacturer_id),  
     INDEX (brand_name)  
 );
+
 # many to one brands
 CREATE TABLE brand_pictures (
     brand_picture_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -166,8 +169,19 @@ CREATE TABLE sales_categories (
 #one item will have differnt unit of measurement one box will have 1)box 2)single 3)case 4)pallet
 
 
+CREATE TABLE classes (
+    class_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  
+    class_name VARCHAR(99) NOT NULL
+);
 
 
+CREATE TABLE attribute_class (
+    attribute_class_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    attribute_class_attribute_id INT UNSIGNED,
+    FOREIGN KEY ( attribute_class_attribute_id) REFERENCES attributes(attribute_id),
+   attribute_class_class_id INT UNSIGNED,
+    FOREIGN KEY (attribute_class_class_id) REFERENCES classes(class_id)
+);
 
 
 
@@ -190,8 +204,6 @@ CREATE TABLE items (
 	item_manufacturer_pricing_id int UNSIGNED unique,
      foreign key (item_manufacturer_pricing_id) references manufacturer_pricing(m_pricing_id),
 
-    item_distributor_id int UNSIGNED,
-	foreign key (item_distributor_id) references distributors(distributor_id),
     
 	item_model_id int unsigned,
 	foreign key (item_model_id) references models(model_id),
@@ -205,8 +217,8 @@ CREATE TABLE items (
 
 CREATE TABLE uoms (
     uom_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    uom_type VARCHAR(50) NOT NULL,
-	uom_sub_type VARCHAR(50)  NOT NULL,
+    uom_type ENUM('SINGLE','SUB_UNIT','UNIT', 'CASE', 'PALLET') NOT NULL,
+	uom_sub_type ENUM('SINGLE','SUB_UNIT','UNIT', 'CASE', 'PALLET') NOT NULL,
     uom_quantity INT  NOT NULL,
     uom_level INT,
 	uom_weight DECIMAL(10, 2) NOT NULL,
@@ -220,7 +232,7 @@ CREATE TABLE uoms (
      #I am not sure yet
 	uom_internal_barcode Varchar(55),
      #one to one 
-	uom_shipping_dimension_id INT UNSIGNED ,
+	uom_shipping_dimension_id INT UNSIGNED UNIQUE,
 	foreign key (uom_shipping_dimension_id) REFERENCES shipping_dimensions(shipping_dimension_id),
        #many to one 
 	uom_packaging_id int UNSIGNED,
@@ -298,3 +310,11 @@ CREATE TABLE item_sales_categories (
     FOREIGN KEY (item_s_c_category_id) REFERENCES sales_categories(s_category_id)
 );
 
+#CREATE TABLE item_classes (
+  #  item_class_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+   # item_class_item_id INT UNSIGNED,
+    #FOREIGN KEY (item_s_c_item) REFERENCES items(item_id),
+    
+   # item_class_class_id INT UNSIGNED,
+   # FOREIGN KEY (item_s_c_category_id) REFERENCES classes(class_id)
+#);

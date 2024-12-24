@@ -1,6 +1,6 @@
 package com.radol.service.impl;
 
-import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ItemDTO;
-import com.radol.dto.ManufacturerPricingDTO;
-import com.radol.dto.UomDTO;
 import com.radol.mapper.ItemMapper;
 import com.radol.repository.ItemRepository;
 
@@ -32,9 +30,10 @@ public class RetailServiceImpl {
 
    
 
-    public ItemDTO findByIdRetail(Integer id) {
-        return Optional.ofNullable(itemRepository.findByIdQueryRetail(id)) // Handle null from query
+    public ItemDTO findById(Integer id) {
+        return Optional.ofNullable(itemRepository.findByIdRetail(id)) // Handle null from query
                 .map(itemMapper::toDTO)
+                /*
                 .map(itemDTO -> {
                     if (itemDTO.getUoms() != null && !itemDTO.getUoms().isEmpty()) {
                         BigDecimal totalPrice = BigDecimal.ZERO;
@@ -52,6 +51,7 @@ public class RetailServiceImpl {
                     }
                     return itemDTO;
                 })
+                */
                 .orElseThrow(() -> new RuntimeException("Item not found"));
     }
 
@@ -77,5 +77,12 @@ public class RetailServiceImpl {
                 .map(itemMapper::toDTO) // Handle only the mapping
                 .collect(Collectors.toList());
     }
+    
+    public List<ItemDTO> searchByItemName(String itemName) {
+        return itemRepository.findByItemNameRetail(itemName).stream()
+                .map(itemMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+    
     
 }

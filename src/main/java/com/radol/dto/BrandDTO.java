@@ -13,9 +13,10 @@ public class BrandDTO {
     private BrandStatus brandStatus; 
     private Integer manufacturerId;
     private List<ModelDTO> models;
+    private Integer distributorId;
     
 	public BrandDTO(Integer brandId, String brandName, String brandDescription, BrandStatus brandStatus,
-			Integer manufacturerId, List<ModelDTO> models) {
+			Integer manufacturerId, List<ModelDTO> models, Integer distributorId) {
 		super();
 		this.brandId = brandId;
 		this.brandName = brandName;
@@ -23,6 +24,7 @@ public class BrandDTO {
 		this.brandStatus = brandStatus;
 		this.manufacturerId = manufacturerId;
 		this.models = models;
+		this.distributorId = distributorId;
 	}
 
 	public BrandDTO() {
@@ -70,19 +72,25 @@ public class BrandDTO {
 		this.manufacturerId = manufacturerId;
 	}
 
-	public List< ModelDTO> getModels() {
+	public List<ModelDTO> getModels() {
 		return models;
 	}
 
 	public void setModels(List<ModelDTO> models) {
 		this.models = models;
 	}
-    
+
+	public Integer getDistributorId() {
+		return distributorId;
+	}
+
+	public void setDistributorId(Integer distributorId) {
+		this.distributorId = distributorId;
+	}
+
 	
 	
     
-	
-  
     
     
     

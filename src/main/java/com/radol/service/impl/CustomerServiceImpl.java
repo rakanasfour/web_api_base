@@ -33,9 +33,22 @@ public class CustomerServiceImpl {
 
     
     public ItemDTO findByIdCustomer(Integer id) {
-        return Optional.ofNullable(itemRepository.findByIdQueryCustomer(id)) // Ensure null safety
+        return Optional.ofNullable(itemRepository.findByIdCustomer(id)) // Ensure null safety
                 .map(itemMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Item not found with ID: " + id));
+    }
+    
+    public List<ItemDTO> searchByItemName(String itemName) {
+        return itemRepository.findByItemNameCustomer(itemName).stream()
+                .map(itemMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+    
+    
+    public List<ItemDTO> findAll() {
+        return itemRepository.findUomLevelBelowFiveCustomer().stream()
+                .map(itemMapper::toDTO) // Handle only the mapping
+                .collect(Collectors.toList());
     }
 
 
@@ -83,10 +96,7 @@ public class CustomerServiceImpl {
     }
     */
     
-    public List<ItemDTO> findAll() {
-        return itemRepository.findUomLevelBelowFiveCustomer().stream()
-                .map(itemMapper::toDTO) // Handle only the mapping
-                .collect(Collectors.toList());
-    }
+
+    
     
 }

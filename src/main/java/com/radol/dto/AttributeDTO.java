@@ -14,19 +14,21 @@ public class AttributeDTO {
     private List<ItemDTO> items;
     
 
+    private List<ClassDTO> classes;
 
 
 	public AttributeDTO(Integer attributeId, String attributeName, AttributeType attributeType,
-			String attributeAssistText, List<ItemDTO> items) {
+			String attributeAssistText, List<ItemDTO> items, List<ClassDTO> classes) {
 		super();
 		this.attributeId = attributeId;
 		this.attributeName = attributeName;
 		this.attributeType = attributeType;
 		this.attributeAssistText = attributeAssistText;
 		this.items = items;
+		this.classes = classes;
 	}
-    
-	
+
+
 	public AttributeDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -81,6 +83,17 @@ public class AttributeDTO {
 	public void setItems(List<ItemDTO> items) {
 		this.items = items;
 	}
+
+
+	public List<ClassDTO> getClasses() {
+		return classes;
+	}
+
+
+	public void setClasses(List<ClassDTO> classes) {
+		this.classes = classes;
+	}
+
 
 	
 	

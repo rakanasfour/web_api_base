@@ -12,6 +12,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -48,6 +50,7 @@ public class Item {
     @Column(name = "item_updated_at_by", length = 99)
     private String itemUpdatedAtBy;
 
+
     @Enumerated(EnumType.STRING)
     @Column(name = "item_status", nullable = false, columnDefinition = "ENUM('AVAILABLE', 'NOTAVAILABLE', 'DISCONTINUED') DEFAULT 'AVAILABLE'")
     private ItemStatus itemStatus;
@@ -55,8 +58,12 @@ public class Item {
     public enum ItemStatus {
         AVAILABLE, NOTAVAILABLE, DISCONTINUED
     }
-
     
+    @ManyToOne
+    @JoinColumn(name = "item_model_id",  referencedColumnName ="model_id",columnDefinition = "INT UNSIGNED")
+    private Model model;
+    
+
     @OneToMany(mappedBy = "mappedItemAttribute", cascade = CascadeType.ALL)
     private List<ItemAttribute> itemAttributes;
     
@@ -76,8 +83,9 @@ public class Item {
 
 	public Item(Integer itemId, String itemName, String itemSku, String itemDescription, String itemAvailability,
 			String itemMsaPromoItem, Timestamp itemCreatedAt, Timestamp itemUpdatedAt, String itemUpdatedAtBy,
-			ItemStatus itemStatus, List<ItemAttribute> itemAttributes, List<ItemSalesCategory> itemSalesCategories,
-			List<Uom> uoms, List<ItemPicture> itemPictures, List<DocumentStorage> documentStorages) {
+			ItemStatus itemStatus, Model model, List<ItemAttribute> itemAttributes,
+			List<ItemSalesCategory> itemSalesCategories, List<Uom> uoms, List<ItemPicture> itemPictures,
+			List<DocumentStorage> documentStorages) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -89,6 +97,7 @@ public class Item {
 		this.itemUpdatedAt = itemUpdatedAt;
 		this.itemUpdatedAtBy = itemUpdatedAtBy;
 		this.itemStatus = itemStatus;
+		this.model = model;
 		this.itemAttributes = itemAttributes;
 		this.itemSalesCategories = itemSalesCategories;
 		this.uoms = uoms;
@@ -203,6 +212,16 @@ public class Item {
 	}
 
 
+	public Model getModel() {
+		return model;
+	}
+
+
+	public void setModel(Model model) {
+		this.model = model;
+	}
+
+
 	public List<ItemAttribute> getItemAttributes() {
 		return itemAttributes;
 	}
@@ -253,6 +272,9 @@ public class Item {
 	}
 
 
+
+    
+	
     
     
     

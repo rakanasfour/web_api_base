@@ -53,10 +53,16 @@ public class Brand {
 
     @OneToMany(mappedBy="brand")
     private List<Model> models;
+    
+  
+    @ManyToOne
+    @JoinColumn(name = "brand_distributor_id",  referencedColumnName ="distributor_id",columnDefinition = "INT UNSIGNED")
+    private Distributor distributor;
 
 
 	public Brand(Integer brandId, String brandName, String brandDescription, BrandStatus brandStatus,
-			Timestamp brandCreatedAt, Timestamp brandUpdatedAt, Manufacturer manufacturer, List<Model> models) {
+			Timestamp brandCreatedAt, Timestamp brandUpdatedAt, Manufacturer manufacturer, List<Model> models,
+			Distributor distributor) {
 		super();
 		this.brandId = brandId;
 		this.brandName = brandName;
@@ -66,6 +72,7 @@ public class Brand {
 		this.brandUpdatedAt = brandUpdatedAt;
 		this.manufacturer = manufacturer;
 		this.models = models;
+		this.distributor = distributor;
 	}
 
 
@@ -153,8 +160,19 @@ public class Brand {
 	public void setModels(List<Model> models) {
 		this.models = models;
 	}
-    
-    
+
+
+	public Distributor getDistributor() {
+		return distributor;
+	}
+
+
+	public void setDistributor(Distributor distributor) {
+		this.distributor = distributor;
+	}
+
+
+	
     
 	
 

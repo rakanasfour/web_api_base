@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 import com.radol.dto.AttributeDTO;
 import com.radol.model.Attribute;
 
-@Mapper(componentModel = "spring",uses = ItemAttributeMapper.class)
+@Mapper(componentModel = "spring",uses = {ItemAttributeMapper.class,AttributeClassMapper.class})
 public interface AttributeMapper extends EntityMapper<AttributeDTO, Attribute> {
 	
 	 @Mapping(source = "attributeId", target = "attributeId")
@@ -16,6 +16,7 @@ public interface AttributeMapper extends EntityMapper<AttributeDTO, Attribute> {
 	    @Mapping(source = "attributeAssistText", target = "attributeAssistText")
 	 
 	    @Mapping(source = "itemAttributes", target = "items")
+	    @Mapping(source = "attributeClasses", target = "classes")
 
 		AttributeDTO toDTO(Attribute entity);
 
