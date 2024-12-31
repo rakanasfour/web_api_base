@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.DistributorDTO;
+import com.radol.dto.request.DistributorRequestDTO;
 import com.radol.mapper.DistributorMapper;
 import com.radol.model.Distributor;
 import com.radol.repository.DistributorRepository;
@@ -54,4 +55,21 @@ public class DistributorServiceImpl implements DistributorService {
     public void deleteById(Integer id) {
         distributorRepository.deleteById(id);
     }
+
+	@Override
+	public DistributorDTO saveDistributorRequest(DistributorRequestDTO dto) {
+
+	    
+		Distributor distributor = new Distributor();
+		distributor.setDistributorName(dto.getDistributorName());
+		distributor.setDistributorAddress(dto.getDistributorAddress());
+		distributor.setDistributorCountry(dto.getDistributorCountry());
+		distributor.setDistributorStatus(dto.getDistributorStatus());
+
+		distributorRepository.save(distributor);
+		return distributorMapper.toDTO(distributor); //
+	}
+	
+    
+    
 }

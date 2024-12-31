@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ModelDTO;
-import com.radol.dto.ModelRequestDTO;
+import com.radol.dto.request.ModelRequestDTO;
 import com.radol.mapper.ModelMapper;
 import com.radol.model.Brand;
 import com.radol.model.Model;
@@ -67,22 +67,18 @@ public class ModelServiceImpl implements ModelService {
 
 	@Override
 	public ModelDTO saveModelRequest(ModelRequestDTO dto) {
-		// Validate brandId in the DTO
-	    if (dto.getBrand() == null) {
-	        throw new IllegalArgumentException("Brand ID cannot be null");
-	    }
-	    
 	    // Fetch the Brand entity
-	    Brand brand = brandRepository.findById(dto.getBrand())
-	            .orElseThrow(() -> new EntityNotFoundException("Brand not found with ID: " + dto.getBrand()));
+	    Brand brand = brandRepository.findById(dto.getBrandId())
+	            .orElseThrow(() -> new EntityNotFoundException("Brand not found with ID: " + dto.getBrandId()));
 
-	    
-		Model model = new Model();
-		model.setModelName(dto.getModelName());
-		model.setModelDescription(dto.getModelDescription());
-		
-		
-		model.setBrand(brand);
-		return modelMapper.toDTO(model); //
+	    // Create and save the Model entity
+	    Model model = new Model();
+	    model.setModelName(dto.getModelName());
+	    model.setModelDescription(dto.getModelDescription());
+	    model.setBrand(brand);
+	    modelRepository.save(model);
+
+	    // Convert and return the DTO
+	    return modelMapper.toDTO(model);
 	}
 }

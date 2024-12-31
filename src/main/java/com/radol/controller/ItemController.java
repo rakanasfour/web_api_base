@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ItemDTO;
-import com.radol.dto.ItemRequestDTO;
+import com.radol.dto.request.ItemRequestDTO;
 import com.radol.service.ItemService;
 
 @RestController
@@ -37,9 +37,12 @@ public class ItemController implements CrudController<ItemDTO, Integer> {
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<ItemDTO> getById(@PathVariable Integer id) {
-        ItemDTO item = itemService.findById(id);
+        ItemDTO item = itemService.findItemByIdAdminUOM(id);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
+    
+
+
 
     @PostMapping
     @Override

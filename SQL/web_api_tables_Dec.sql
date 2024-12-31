@@ -310,6 +310,9 @@ CREATE TABLE item_sales_categories (
     FOREIGN KEY (item_s_c_category_id) REFERENCES sales_categories(s_category_id)
 );
 
+select * from manufacturer_pricing;
+select * from uoms;
+
 #CREATE TABLE item_classes (
   #  item_class_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
    # item_class_item_id INT UNSIGNED,

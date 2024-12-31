@@ -1,19 +1,17 @@
-package com.radol.dto;
-
-import com.radol.model.Brand;
+package com.radol.dto.request;
 
 public class ModelRequestDTO {
 	  private Integer modelId;
 	  private String modelName;
 	  private String modelDescription;
-	  private Integer brand;
+	  private Integer brandId;
 	  
-	public ModelRequestDTO(Integer modelId, String modelName, String modelDescription, Integer brand) {
+	public ModelRequestDTO(Integer modelId, String modelName, String modelDescription, Integer brandId) {
 		super();
 		this.modelId = modelId;
 		this.modelName = modelName;
 		this.modelDescription = modelDescription;
-		this.brand = brand;
+		this.brandId = brandId;
 	}
 
 	public ModelRequestDTO() {
@@ -45,22 +43,26 @@ public class ModelRequestDTO {
 		this.modelDescription = modelDescription;
 	}
 
-	public Integer getBrand() {
-		return brand;
+	public Integer getBrandId() {
+		return brandId;
 	}
 
-	public void setBrand(Integer brand) {
-		this.brand = brand;
+	public void setBrandId(Integer brandId) {
+		this.brandId = brandId;
 	}
 	  
 	
+	
+	
+	  
+	  
 	  
 	  
 	  
 }
 
-  
 
-   
+
+ 
 
 

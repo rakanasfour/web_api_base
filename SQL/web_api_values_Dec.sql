@@ -83,7 +83,10 @@ INSERT INTO manufacturer_pricing (m_pricing_list, m_pricing_msrp, m_pricing_rmap
 (2, 2, 2, 32, 2, 2),
 (3, 3, 3, 33, 3, 3),
 (4,4, 4, 34, 4,4),
-(5, 5, 5, 35, 5, 5);
+(5, 5, 5, 35, 5, 5),
+(6, 6, 6, 66, 6, 6),
+(7,7, 7, 77, 7,7),
+(8, 8, 8, 88, 8, 8);
 INSERT INTO manufacturers (manufacturer_name, manufacturer_description, manufacturer_status) 
 VALUES
 ('Global Tech Industries', 'Leading manufacturer of high-tech solutions', 'ACTIVE'),
@@ -238,10 +241,10 @@ INSERT INTO uoms (uom_type,uom_sub_type,uom_quantity,uom_level,uom_weight, uom_u
 ('UNIT','SINGLE',15, 5, 1.2,'Admin', 'AVAILABLE', 2, 2,1,2),
 ('CASE','UNIT',25, 6, 12,'Admin', 'AVAILABLE', 3, 3,1,3),
 ('PALLET','SINGLE',1, 10,33, 'Admin', 'AVAILABLE', 4, 1,1,4),
-('SINGLE','SINGLE',1, 1, 0.4,'Admin', 'AVAILABLE', 5, 1,2,1),
-('UNIT','SINGLE',15, 5, 1.4,'Admin', 'AVAILABLE', 6, 2,2,2),
-('CASE','UNIT',25, 6, 7,'Admin', 'AVAILABLE', 7, 7,2,3),
-('PALLET','SINGLE',1, 10, 12,'Admin', 'AVAILABLE', 8, 1,2,4)
+('SINGLE','SINGLE',1, 1, 0.4,'Admin', 'AVAILABLE', 5, 1,2,5),
+('UNIT','SINGLE',15, 5, 1.4,'Admin', 'AVAILABLE', 6, 2,2,6),
+('CASE','UNIT',25, 6, 7,'Admin', 'AVAILABLE', 7, 7,2,7),
+('PALLET','SINGLE',1, 10, 12,'Admin', 'AVAILABLE', 8, 1,2,8)
 
 ;
 
@@ -298,5 +301,8 @@ VALUES
 (4, 4),  -- Item 4 categorized as Chewing Tobacco
 (5, 5);  -- Item 5 categorized as Cigarette
 
-
+SELECT uom_manufacturer_pricing_id, COUNT(*)
+FROM uoms
+GROUP BY uom_manufacturer_pricing_id
+HAVING COUNT(*) > 1;
 

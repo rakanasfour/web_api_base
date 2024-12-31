@@ -9,13 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ManufacturerDTO;
+import com.radol.dto.ModelDTO;
+import com.radol.dto.request.ManufacturerRequestDTO;
 import com.radol.mapper.ManufacturerFacilityMapper;
 import com.radol.mapper.ManufacturerMapper;
+import com.radol.model.Brand;
 import com.radol.model.Manufacturer;
 import com.radol.model.ManufacturerFacility;
+import com.radol.model.Model;
 import com.radol.repository.ManufacturerRepository;
 import com.radol.service.ManufacturerService;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -85,4 +90,19 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public void deleteById(Integer id) {
         manufacturerRepository.deleteById(id);
     }
+    
+    @Override
+	public ManufacturerDTO saveManufacturerRequest(ManufacturerRequestDTO dto) {
+
+    	Manufacturer manufacturer = new Manufacturer();
+    	manufacturer.setManufacturerName(dto.getManufacturerName());
+    	manufacturer.setManufacturerDescription(dto.getManufacturerDescription());
+    	manufacturer.setManufacturerStatus(dto.getManufacturerStatus());
+	    manufacturerRepository.save(manufacturer);
+
+	    // Convert and return the DTO
+	    return manufacturerMapper.toDTO(manufacturer);
+	}
+    
+    
 }

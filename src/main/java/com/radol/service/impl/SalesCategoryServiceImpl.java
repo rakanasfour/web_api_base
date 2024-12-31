@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.SalesCategoryDTO;
+import com.radol.dto.request.SalesCategoryRequestDTO;
 import com.radol.mapper.SalesCategoryMapper;
 import com.radol.model.SalesCategory;
 import com.radol.repository.SalesCategoryRepository;
@@ -55,6 +56,20 @@ public class SalesCategoryServiceImpl implements SalesCategoryService {
     public void deleteById(Integer id) {
     	salesCategoryRepository.deleteById(id);
     }
+
+	@Override
+	public SalesCategoryDTO saveSalesCategoryRequest(SalesCategoryRequestDTO dto) {
+		
+		SalesCategory salesCategory= new SalesCategory();
+		salesCategory.setSalesCategoryName(dto.getSalesCategoryName());
+		salesCategory.setSalesCategoryMeasurementType(dto.getSalesCategoryMeasurementType());
+		salesCategory.setSalesCategorySystemMeasurement(dto.getSalesCategorySystemMeasurement());
+		
+		salesCategoryRepository.save(salesCategory);
+		
+		
+		return salesCategoryMapper.toDTO(salesCategory);
+	}
 
    
 }

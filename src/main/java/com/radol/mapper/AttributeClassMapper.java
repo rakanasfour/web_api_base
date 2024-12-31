@@ -9,6 +9,7 @@ import com.radol.dto.AttributeDTO;
 import com.radol.dto.ClassDTO;
 import com.radol.model.AttributeClass;
 
+
 @Mapper(componentModel = "spring", uses= {AttributeMapper.class, ClassMapper.class })
 public interface AttributeClassMapper extends EntityMapper<AttributeClassDTO, AttributeClass> {
 	

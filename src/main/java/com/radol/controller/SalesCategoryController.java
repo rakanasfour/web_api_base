@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.radol.dto.ManufacturerFacilityDTO;
 import com.radol.dto.SalesCategoryDTO;
+import com.radol.dto.request.SalesCategoryRequestDTO;
 import com.radol.service.SalesCategoryService;
 
 @RestController
@@ -60,4 +62,11 @@ public class SalesCategoryController implements CrudController<SalesCategoryDTO,
         salesCategoryService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+    @PostMapping("/request")
+    public ResponseEntity<SalesCategoryDTO> sendRequest(@RequestBody SalesCategoryRequestDTO dto) {
+    	SalesCategoryDTO salesCategory = salesCategoryService.saveSalesCategoryRequest(dto);
+        return new ResponseEntity<>(salesCategory, HttpStatus.CREATED);
+    }
+    
 }

@@ -76,9 +76,11 @@ public class ManufacturerFacilityServiceImpl implements ManufacturerFacilityServ
     	ManufacturerFacility facility = new ManufacturerFacility();
     	facility.setFacilityName(dto.getFacilityName());
     	facility.setFacilityCountry(dto.getFacilityCountry());
-    	facility.setStatus(dto.getStatus());
+    	facility.setFacilityStatus(dto.getFacilityStatus());
     	facility.setManufacturer(manufacturer);
-
+    	
+    	
+    	manufacturerFacilityRepository.save(facility);
     	return manufacturerFacilityMapper.toDTO(facility);
     	
     }

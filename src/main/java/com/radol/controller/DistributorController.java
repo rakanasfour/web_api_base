@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.DistributorDTO;
+import com.radol.dto.ModelDTO;
+import com.radol.dto.request.DistributorRequestDTO;
 import com.radol.service.DistributorService;
 
 @RestController
@@ -59,5 +61,11 @@ public class DistributorController implements CrudController<DistributorDTO, Int
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         distributorService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PostMapping("/request")
+    public ResponseEntity<DistributorDTO> sendRequest(@RequestBody DistributorRequestDTO dto) {
+    	DistributorDTO distributor = distributorService.saveDistributorRequest(dto);
+        return new ResponseEntity<>(distributor, HttpStatus.CREATED);
     }
 }

@@ -30,8 +30,8 @@ public class ManufacturerFacility {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private FacilityStatus status;
-    
+    private FacilityStatus facilityStatus;
+ 
     public enum FacilityStatus {
         ACTIVE,
         INACTIVE
@@ -48,96 +48,82 @@ public class ManufacturerFacility {
     @JoinColumn(name = "m_f_manufacturer_id", referencedColumnName = "manufacturer_id", nullable = false)
     private Manufacturer manufacturer;
 
-    
-	public ManufacturerFacility(Integer facilityId, String facilityName, String facilityCountry, FacilityStatus status,
-			Timestamp createdAt, Timestamp updatedAt, Manufacturer manufacturer) {
+	public ManufacturerFacility(Integer facilityId, String facilityName, String facilityCountry,
+			FacilityStatus facilityStatus, Timestamp createdAt, Timestamp updatedAt, Manufacturer manufacturer) {
 		super();
 		this.facilityId = facilityId;
 		this.facilityName = facilityName;
 		this.facilityCountry = facilityCountry;
-		this.status = status;
+		this.facilityStatus = facilityStatus;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.manufacturer = manufacturer;
 	}
-
 
 	public ManufacturerFacility() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Integer getFacilityId() {
 		return facilityId;
 	}
-
 
 	public void setFacilityId(Integer facilityId) {
 		this.facilityId = facilityId;
 	}
 
-
 	public String getFacilityName() {
 		return facilityName;
 	}
-
 
 	public void setFacilityName(String facilityName) {
 		this.facilityName = facilityName;
 	}
 
-
 	public String getFacilityCountry() {
 		return facilityCountry;
 	}
-
 
 	public void setFacilityCountry(String facilityCountry) {
 		this.facilityCountry = facilityCountry;
 	}
 
-
-	public FacilityStatus getStatus() {
-		return status;
+	public FacilityStatus getFacilityStatus() {
+		return facilityStatus;
 	}
 
-
-	public void setStatus(FacilityStatus status) {
-		this.status = status;
+	public void setFacilityStatus(FacilityStatus facilityStatus) {
+		this.facilityStatus = facilityStatus;
 	}
-
 
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-
 
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
 
 	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
 
-
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
 	}
-	
-	
+
+    
+    
+    
 	
     
     

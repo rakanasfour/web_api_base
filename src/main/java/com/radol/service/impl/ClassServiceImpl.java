@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ClassDTO;
-import com.radol.dto.DocumentStorageDTO;
-import com.radol.dto.SalesCategoryDTO;
+import com.radol.dto.request.ClassRequestDTO;
 import com.radol.mapper.ClassMapper;
 import com.radol.model.ClassEntity;
 import com.radol.repository.ClassRepository;
@@ -62,6 +61,19 @@ public class ClassServiceImpl implements ClassService {
     public void deleteById(Integer id) {
     	classRepository.deleteById(id);
     }
+
+	@Override
+	public ClassDTO saveClassRequest(ClassRequestDTO dto) {
+		
+		ClassEntity classEnity = new ClassEntity();
+		classEnity.setClassName(dto.getClassName());
+		
+		classRepository.save(classEnity);
+		
+		return classMapper.toDTO(classEnity);
+		
+		
+	}
 
    
 }

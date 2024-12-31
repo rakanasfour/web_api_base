@@ -1,13 +1,14 @@
 package com.radol.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ItemDTO;
-import com.radol.dto.ItemRequestDTO;
+import com.radol.dto.request.ItemRequestDTO;
 import com.radol.mapper.ItemMapper;
 import com.radol.model.Attribute;
 import com.radol.model.Item;
@@ -130,9 +131,9 @@ public class ItemServiceImpl implements ItemService {
     }
     
     
-    @Override
-    public ItemDTO findById(Integer id) {
-        return itemRepository.findById(id)
+
+    public ItemDTO findItemByIdAdminUOM(Integer id) {
+    	return Optional.ofNullable(itemRepository.findItemByIdAdminUOM(id))
                 .map(itemMapper::toDTO)
                 /*
                 .map(itemDTO -> {
@@ -162,7 +163,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDTO> findAll() {
-        return itemRepository.findAll().stream()
+        return itemRepository.findAllItemsAdmin().stream()
                 .map(itemMapper::toDTO)
                 .collect(Collectors.toList());
     }
@@ -245,6 +246,15 @@ public class ItemServiceImpl implements ItemService {
         // Map saved entity back to DTO and return
         return itemMapper.toDTO(savedItem);
     }
+
+
+
+
+	@Override
+	public ItemDTO findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
     

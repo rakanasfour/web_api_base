@@ -41,6 +41,19 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	*/
 	
+	
+	@Query("SELECT i FROM Item i LEFT JOIN FETCH i.uoms")
+	List<Item> findAllItemsAdmin();
+	
+	
+	@Query("SELECT DISTINCT i FROM Item i JOIN FETCH i.uoms u")
+	List<Item> findItemByIdAdmin();
+	
+	
+	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
+		       "WHERE i.itemId = :id")
+		Item findItemByIdAdminUOM(@Param("id") Integer id);
+	
 	@Query("SELECT DISTINCT i FROM Item i JOIN FETCH i.uoms u WHERE u.uomLevel < 5 AND u IS NOT NULL")
 	List<Item> findUomLevelBelowFiveCustomer();
 
@@ -53,16 +66,16 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
 		       "WHERE u.uomLevel < 5 AND u IS NOT NULL AND i.itemId = :id")
-		Item findByIdCustomer(@Param("id") Integer id);
+		Item findItemByIdCustomer(@Param("id") Integer id);
 	
 	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
 		       "WHERE u.uomLevel < 7 AND u.uomLevel > 4 AND u IS NOT NULL AND i.itemId = :id")
-		Item findByIdRetail(@Param("id") Integer id);
+		Item findItemByIdRetail(@Param("id") Integer id);
 	
 	//find by id
 	@Query("SELECT i FROM Item i JOIN FETCH i.uoms u " +
 		       "WHERE u.uomLevel < 11 AND u.uomLevel > 4 AND u IS NOT NULL AND i.itemId = :id")
-		Item findByIdWholeSale(@Param("id") Integer id);
+		Item findItemByIdWholeSale(@Param("id") Integer id);
 	
 	
 	//find by name

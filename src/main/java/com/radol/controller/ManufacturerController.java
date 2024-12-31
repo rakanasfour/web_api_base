@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ManufacturerDTO;
+import com.radol.dto.request.ManufacturerRequestDTO;
 import com.radol.service.ManufacturerService;
 
 
@@ -62,4 +63,14 @@ public class ManufacturerController implements CrudController<ManufacturerDTO, I
         manufacturerService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+
+    
+    @PostMapping("/request")
+    public ResponseEntity<ManufacturerDTO> sendRequest(@RequestBody ManufacturerRequestDTO dto) {
+    	ManufacturerDTO manufacturer = manufacturerService.saveManufacturerRequest(dto);
+        return new ResponseEntity<>(manufacturer, HttpStatus.CREATED);
+    }
+    
+    
 }

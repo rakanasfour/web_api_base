@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ModelDTO;
-import com.radol.dto.ModelRequestDTO;
+import com.radol.dto.request.ModelRequestDTO;
 import com.radol.service.ModelService;
 
 @RestController

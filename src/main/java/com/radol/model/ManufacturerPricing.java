@@ -125,6 +125,9 @@ public class ManufacturerPricing {
 	public void setUom(Uom uom) {
 		this.uom = uom;
 	}
+
+	
+    
     
     
     

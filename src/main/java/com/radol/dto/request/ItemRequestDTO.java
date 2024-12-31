@@ -1,7 +1,9 @@
-package com.radol.dto;
+package com.radol.dto.request;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import com.radol.model.Item.ItemStatus;
 
