@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.PackagingDTO;
+import com.radol.dto.request.PackagingRequestDTO;
 import com.radol.service.PackagingService;
 
 @RestController
@@ -59,5 +60,11 @@ public class PackagingController implements CrudController<PackagingDTO, Integer
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         packagingService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PackagingDTO> updatePackaging(@PathVariable Integer id, @RequestBody PackagingRequestDTO dto) {
+        PackagingDTO packagingDTO = packagingService.updatePackaging(id, dto);
+        return new ResponseEntity<>(packagingDTO, HttpStatus.OK);
     }
 }

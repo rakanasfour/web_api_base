@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ChannelDTO;
+import com.radol.dto.request.ChannelRequestDTO;
 import com.radol.mapper.ChannelMapper;
 import com.radol.model.Channel;
 import com.radol.repository.ChannelRepository;
@@ -53,5 +54,15 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public void deleteById(Integer id) {
         channelRepository.deleteById(id);
+    }
+    
+    @Override
+    public ChannelDTO updateChannel(Integer id, ChannelRequestDTO dto) {
+        Channel channelEntity = new Channel();
+        channelEntity.setChannelId(id);
+        channelEntity.setChannelDescription(dto.getChannelDescription());
+        channelEntity.setChannelsLevel(dto.getChannelsLevel());
+        channelEntity.setChannelDefaultUom(dto.getChannelDefaultUom());
+        return channelMapper.toDTO(channelRepository.save(channelEntity));
     }
 }

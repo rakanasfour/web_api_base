@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ChannelDTO;
+import com.radol.dto.request.ChannelRequestDTO;
 import com.radol.service.ChannelService;
 
 @RestController
@@ -59,5 +60,10 @@ public class ChannelController implements CrudController<ChannelDTO, Integer> {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         channelService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ChannelDTO> updateChannel(@PathVariable Integer id, @RequestBody ChannelRequestDTO dto) {
+        ChannelDTO channelDTO = channelService.updateChannel(id, dto);
+        return new ResponseEntity<>(channelDTO, HttpStatus.OK);
     }
 }

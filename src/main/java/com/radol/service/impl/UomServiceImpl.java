@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.UomDTO;
+import com.radol.dto.request.UOMRequestDTO;
 import com.radol.mapper.ChannelMapper;
 import com.radol.mapper.UomMapper;
 import com.radol.model.Channel;
-import com.radol.model.Item;
 import com.radol.model.Uom;
 import com.radol.model.UomChannel;
 import com.radol.repository.ChannelRepository;
@@ -82,5 +82,17 @@ public class UomServiceImpl implements UomService {
     @Override
     public void deleteById(Integer id) {
         uomRepository.deleteById(id);
+    }
+    
+    @Override
+    public UomDTO updateUom(Integer id, UOMRequestDTO dto) {
+        Uom uom = new Uom();
+        uom.setUomId(id);
+        uom.setUomType(dto.getUomType());
+        uom.setUomLevel(dto.getUomLevel());
+        uom.setUomManufacturerBarcode(dto.getUomManufacturerBarcode());
+        uom.setUomInternalBarcode(dto.getUomInternalBarcode());
+        uom.setUomStatus(dto.getUomStatus());
+        return uomMapper.toDTO(uomRepository.save(uom));
     }
 }

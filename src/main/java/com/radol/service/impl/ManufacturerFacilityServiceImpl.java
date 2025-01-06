@@ -86,4 +86,15 @@ public class ManufacturerFacilityServiceImpl implements ManufacturerFacilityServ
     }
     
     
+    @Override
+    public ManufacturerFacilityDTO updateManufacturerFacility(Integer id, ManufacturerFacilityRequestDTO dto) {
+        ManufacturerFacility manufacturerFacility = new ManufacturerFacility();
+        manufacturerFacility.setFacilityId(id);
+        manufacturerFacility.setFacilityName(dto.getFacilityName());
+        manufacturerFacility.setFacilityCountry(dto.getFacilityCountry());
+        manufacturerFacility.setFacilityStatus(dto.getFacilityStatus());
+        return manufacturerFacilityMapper.toDTO(manufacturerFacilityRepository.save(manufacturerFacility));
+    }
+    
+    
 }

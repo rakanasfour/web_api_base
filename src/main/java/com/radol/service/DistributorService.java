@@ -8,5 +8,6 @@ public interface DistributorService  extends CrudService<DistributorDTO, Distrib
 
 
 	public DistributorDTO saveDistributorRequest(DistributorRequestDTO dto);
+	 public DistributorDTO updateDistributor(Integer id, DistributorRequestDTO dto);
 		   
 	}

@@ -70,5 +70,11 @@ public class ItemController implements CrudController<ItemDTO, Integer> {
         ItemDTO item = itemService.saveItemRequest(dto);
         return new ResponseEntity<>(item, HttpStatus.CREATED);
     }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ItemDTO> updateItem(@PathVariable Integer id, @RequestBody ItemRequestDTO dto) {
+        ItemDTO itemDTO = itemService.updateItem(id, dto);
+        return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+    }
 
 }

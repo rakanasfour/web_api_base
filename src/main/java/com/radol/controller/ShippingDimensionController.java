@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ShippingDimensionDTO;
+import com.radol.dto.request.ShippingDimensionRequestDTO;
 import com.radol.service.ShippingDimensionService;
 
 @RestController
@@ -59,5 +60,11 @@ public class ShippingDimensionController implements CrudController<ShippingDimen
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         shippingDimensionService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ShippingDimensionDTO> updateShippingDimension(@PathVariable Integer id, @RequestBody ShippingDimensionRequestDTO dto) {
+        ShippingDimensionDTO shippingDimensionDTO = shippingDimensionService.updateShippingDimension(id, dto);
+        return new ResponseEntity<>(shippingDimensionDTO, HttpStatus.OK);
     }
 }

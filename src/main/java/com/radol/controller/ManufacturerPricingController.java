@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ManufacturerPricingDTO;
+import com.radol.dto.request.ManufacturerPricingRequestDTO;
 import com.radol.service.ManufacturerPricingService;
 
 @RestController
@@ -59,5 +60,10 @@ public class ManufacturerPricingController implements CrudController<Manufacture
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         manufacturerPricingService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ManufacturerPricingDTO> updateManufacturerPricing(@PathVariable Integer id, @RequestBody ManufacturerPricingRequestDTO dto) {
+        ManufacturerPricingDTO manufacturerPricingDTO = manufacturerPricingService.updateManufacturerPricing(id, dto);
+        return new ResponseEntity<>(manufacturerPricingDTO, HttpStatus.OK);
     }
 }

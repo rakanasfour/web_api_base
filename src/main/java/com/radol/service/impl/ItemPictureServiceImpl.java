@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ItemPictureDTO;
+import com.radol.dto.request.ItemPictureRequestDTO;
 import com.radol.mapper.ItemPictureMapper;
 import com.radol.model.ItemPicture;
 import com.radol.repository.ItemPictureRepository;
@@ -53,5 +54,13 @@ public class ItemPictureServiceImpl implements ItemPictureService {
     @Override
     public void deleteById(Integer id) {
         itemPictureRepository.deleteById(id);
+    }
+    
+    @Override
+    public ItemPictureDTO updateItemPicture(Integer id, ItemPictureRequestDTO dto) {
+        ItemPicture itemPicture = new ItemPicture();
+        itemPicture.setItemPictureId(id);
+        itemPicture.setItemPictureMain(dto.getItemPictureMain());
+        return itemPictureMapper.toDTO(itemPictureRepository.save(itemPicture));
     }
 }

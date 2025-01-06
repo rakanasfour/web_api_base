@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ManufacturerPricingDTO;
+import com.radol.dto.request.ManufacturerPricingRequestDTO;
 import com.radol.mapper.ManufacturerPricingMapper;
 import com.radol.model.ManufacturerPricing;
 import com.radol.repository.ManufacturerPricingRepository;
@@ -53,5 +54,18 @@ public class ManufacturerPricingServiceImpl implements ManufacturerPricingServic
     @Override
     public void deleteById(Integer id) {
         manufacturerPricingRepository.deleteById(id);
+    }
+
+    @Override
+    public ManufacturerPricingDTO updateManufacturerPricing(Integer id, ManufacturerPricingRequestDTO dto) {
+        ManufacturerPricing manufacturerPricing = new ManufacturerPricing();
+        manufacturerPricing.setPricingId(id);
+        manufacturerPricing.setPricingList(dto.getPricingList());
+        manufacturerPricing.setPricingMsrp(dto.getPricingMsrp());
+        manufacturerPricing.setPricingRmap(dto.getPricingRmap());
+        manufacturerPricing.setPricingWholesalePrice(dto.getPricingWholesalePrice());
+        manufacturerPricing.setPricingFederalExciseTax(dto.getPricingFederalExciseTax());
+        manufacturerPricing.setPricingCost(dto.getPricingCost());
+        return manufacturerPricingMapper.toDTO(manufacturerPricingRepository.save(manufacturerPricing));
     }
 }

@@ -68,6 +68,12 @@ public class ManufacturerFacilityController implements CrudController<Manufactur
         return new ResponseEntity<>(manufacturerFacility, HttpStatus.CREATED);
     }
     
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ManufacturerFacilityDTO> updateManufacturerFacility(@PathVariable Integer id, @RequestBody ManufacturerFacilityRequestDTO dto) {
+        ManufacturerFacilityDTO manufacturerFacilityDTO = manufacturerFacilityService.updateManufacturerFacility(id, dto);
+        return new ResponseEntity<>(manufacturerFacilityDTO, HttpStatus.OK);
+    }
+    
     
     
     

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.radol.dto.ClassDTO;
 import com.radol.dto.DistributorDTO;
 import com.radol.dto.ModelDTO;
+import com.radol.dto.request.ClassRequestDTO;
 import com.radol.dto.request.DistributorRequestDTO;
 import com.radol.service.DistributorService;
 
@@ -68,4 +70,16 @@ public class DistributorController implements CrudController<DistributorDTO, Int
     	DistributorDTO distributor = distributorService.saveDistributorRequest(dto);
         return new ResponseEntity<>(distributor, HttpStatus.CREATED);
     }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<DistributorDTO> updateDistributor(@PathVariable Integer id, @RequestBody DistributorRequestDTO dto) {
+    	System.out.println("we are here");
+    	DistributorDTO distributor = distributorService.updateDistributor(id, dto);
+
+        return new ResponseEntity<>(distributor, HttpStatus.OK);
+    }
+    
+    
+    
+    
 }

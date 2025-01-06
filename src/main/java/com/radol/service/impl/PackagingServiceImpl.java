@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.PackagingDTO;
+import com.radol.dto.request.PackagingRequestDTO;
 import com.radol.mapper.PackagingMapper;
 import com.radol.model.Packaging;
 import com.radol.repository.PackagingRepository;
@@ -54,5 +55,14 @@ public class PackagingServiceImpl implements PackagingService {
     @Override
     public void deleteById(Integer id) {
         packagingRepository.deleteById(id);
+    }
+    
+
+    @Override
+    public PackagingDTO updatePackaging(Integer id, PackagingRequestDTO dto) {
+        Packaging packaging = new Packaging();
+        packaging.setPackagingId(id);
+        packaging.setPackagingType(dto.getPackagingType());
+        return packagingMapper.toDTO(packagingRepository.save(packaging));
     }
 }

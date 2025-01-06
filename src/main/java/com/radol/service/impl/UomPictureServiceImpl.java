@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.UomPictureDTO;
+import com.radol.dto.request.UOMPictureRequestDTO;
 import com.radol.mapper.UomPictureMapper;
 import com.radol.model.UomPicture;
 import com.radol.repository.UomPictureRepository;
@@ -53,5 +54,14 @@ public class UomPictureServiceImpl implements UomPictureService {
     @Override
     public void deleteById(Integer id) {
         uomPictureRepository.deleteById(id);
+    }
+    
+    @Override
+    public UomPictureDTO updateUomPicture(Integer id, UOMPictureRequestDTO dto) {
+        UomPicture uomPicture = new UomPicture();
+        uomPicture.setUomPictureId(id);
+        uomPicture.setUomPictureName(dto.getUomPictureName());
+        uomPicture.setUomPictureLink(dto.getUomPictureLink());
+        return uomPictureMapper.toDTO(uomPictureRepository.save(uomPicture));
     }
 }

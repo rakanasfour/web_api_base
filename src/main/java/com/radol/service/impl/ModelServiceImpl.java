@@ -81,4 +81,17 @@ public class ModelServiceImpl implements ModelService {
 	    // Convert and return the DTO
 	    return modelMapper.toDTO(model);
 	}
+	
+	@Override
+    public ModelDTO updateModel(Integer id, ModelRequestDTO dto) {
+	    Brand brand = brandRepository.findById(dto.getBrandId())
+	            .orElseThrow(() -> new EntityNotFoundException("Brand not found with ID: " + dto.getBrandId()));
+		 
+        Model modelEntity = new Model();
+        modelEntity.setModelId(id);
+        modelEntity.setModelName(dto.getModelName());
+        modelEntity.setModelDescription(dto.getModelDescription());
+        modelEntity.setBrand(brand);
+        return modelMapper.toDTO(modelRepository.save(modelEntity));
+    }
 }

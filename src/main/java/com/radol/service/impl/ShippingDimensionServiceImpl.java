@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ShippingDimensionDTO;
+import com.radol.dto.request.ShippingDimensionRequestDTO;
 import com.radol.mapper.ShippingDimensionMapper;
 import com.radol.model.ShippingDimension;
 import com.radol.repository.ShippingDimensionRepository;
@@ -53,5 +54,16 @@ public class ShippingDimensionServiceImpl implements ShippingDimensionService {
     @Override
     public void deleteById(Integer id) {
         shippingDimensionRepository.deleteById(id);
+    }
+    
+    @Override
+    public ShippingDimensionDTO updateShippingDimension(Integer id, ShippingDimensionRequestDTO dto) {
+        ShippingDimension shippingDimension = new ShippingDimension();
+        shippingDimension.setShippingDimensionId(id);
+        shippingDimension.setHeight(dto.getHeight());
+        shippingDimension.setWidth(dto.getWidth());
+        shippingDimension.setLength(dto.getLength());
+        shippingDimension.setWeight(dto.getWeight());
+        return shippingDimensionMapper.toDTO(shippingDimensionRepository.save(shippingDimension));
     }
 }

@@ -1,5 +1,6 @@
 package com.radol.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -255,6 +256,27 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+    @Override
+    public ItemDTO updateItem(Integer id, ItemRequestDTO dto) {
+        Item item = new Item();
+        item.setItemId(id);
+        item.setItemName(dto.getItemName());
+        item.setItemSku(dto.getItemSku());
+        item.setItemStatus(dto.getItemStatus());
+        item.setItemDescription(dto.getItemDescription());       
+        
+        
+        // Associate the item with a model
+        Model model = modelRepository.findById(dto.getModelId())
+            .orElseThrow(() -> new RuntimeException("Model not found with ID: " + dto.getModelId()));
+        model.getItems().add(item);
+        modelRepository.save(model);
+        
+        item.setModel(model);
+
+        return itemMapper.toDTO(itemRepository.save(item));
+    }
 
 	
     

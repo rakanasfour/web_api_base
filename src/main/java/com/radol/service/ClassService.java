@@ -7,6 +7,8 @@ import com.radol.model.ClassEntity;
 public interface ClassService  extends CrudService<ClassDTO, ClassEntity, Integer>  {
 
     public ClassDTO saveClassRequest(ClassRequestDTO dto);
+    
+    public ClassDTO updateClass(Integer id, ClassRequestDTO dto);
 
 
 	   

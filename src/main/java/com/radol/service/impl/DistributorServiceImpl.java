@@ -69,6 +69,18 @@ public class DistributorServiceImpl implements DistributorService {
 		distributorRepository.save(distributor);
 		return distributorMapper.toDTO(distributor); //
 	}
+
+	@Override
+	public DistributorDTO updateDistributor(Integer id, DistributorRequestDTO dto) {
+		Distributor distributor = new Distributor();
+		distributor.setDistributorId(id);
+		distributor.setDistributorName(dto.getDistributorName());
+		distributor.setDistributorAddress(dto.getDistributorAddress());
+		distributor.setDistributorCountry(dto.getDistributorCountry());
+		distributor.setDistributorStatus(dto.getDistributorStatus());
+		
+		return distributorMapper.toDTO(distributorRepository.save(distributor));
+	}
 	
     
     

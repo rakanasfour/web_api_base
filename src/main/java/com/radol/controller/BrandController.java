@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.BrandDTO;
 import com.radol.dto.BrandModelDTO;
+import com.radol.dto.request.BrandRequestDTO;
 import com.radol.service.BrandService;
 
 @RestController
@@ -72,6 +73,12 @@ public class BrandController implements CrudController<BrandDTO, Integer> {
     public ResponseEntity<List<BrandDTO>> getAllBrandsWithModelList() {
         List<BrandDTO> brandDTOs = brandService.getAllBrandsWithModelList();
         return ResponseEntity.ok(brandDTOs);
+    }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BrandDTO> updateBrand(@PathVariable Integer id, @RequestBody BrandRequestDTO dto) {
+        BrandDTO brandDTO = brandService.updateBrand(id, dto);
+        return new ResponseEntity<>(brandDTO, HttpStatus.OK);
     }
 
 }

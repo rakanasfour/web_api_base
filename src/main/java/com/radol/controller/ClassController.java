@@ -70,4 +70,11 @@ public class ClassController implements CrudController<ClassDTO, Integer> {
     	ClassDTO classEntity = classService.saveClassRequest(dto);
         return new ResponseEntity<>(classEntity, HttpStatus.CREATED);
     }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ClassDTO> updateClass(@PathVariable Integer id, @RequestBody ClassRequestDTO dto) {
+    	ClassDTO classEntity = classService.updateClass(id, dto);
+        return new ResponseEntity<>(classEntity, HttpStatus.OK);
+    }
+    
 }

@@ -8,6 +8,8 @@ public interface ModelService  extends CrudService<ModelDTO, Model, Integer>  {
 
 	
 	public ModelDTO saveModelRequest(ModelRequestDTO dto);
+    ModelDTO updateModel(Integer id, ModelRequestDTO dto);
+
 	
 
 	   

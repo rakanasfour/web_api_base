@@ -6,7 +6,7 @@ import java.util.Date;
 import com.radol.model.User.Role;
 import com.radol.model.User.Status;
 
-public class UsetRequestDTO {
+public class UserRequestDTO {
 
     private Integer userId;
     private String userName;
@@ -22,7 +22,7 @@ public class UsetRequestDTO {
     private String refreshToken;
     private Integer failedLogin;
     private java.util.Date accountLockedUntil;
-	public UsetRequestDTO(Integer userId, String userName, String userPassword, String userEmail,
+	public UserRequestDTO(Integer userId, String userName, String userPassword, String userEmail,
 			String userFirstName, String userLastName, Role role, Status status, Timestamp createdAt,
 			Timestamp updatedAt, Timestamp lastLogin, String refreshToken, Integer failedLogin,
 			Date accountLockedUntil) {
@@ -42,7 +42,7 @@ public class UsetRequestDTO {
 		this.failedLogin = failedLogin;
 		this.accountLockedUntil = accountLockedUntil;
 	}
-	public UsetRequestDTO() {
+	public UserRequestDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

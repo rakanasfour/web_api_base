@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.UserDTO;
+import com.radol.dto.request.UserRequestDTO;
 import com.radol.mapper.UserMapper;
 import com.radol.model.User;
 import com.radol.repository.UserRepository;
@@ -54,5 +55,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Integer id) {
         userRepository.deleteById(id);
+    }
+    @Override
+    public UserDTO updateUser(Integer id, UserRequestDTO dto) {
+        User user = new User();
+        user.setUserId(id);
+        user.setUserName(dto.getUserName());
+        user.setUserPassword(null);
+        user.setUserEmail(dto.getUserEmail());
+        user.setUserFirstName(null);
+        user.setUserLastName(null);
+        user.setRole(dto.getRole());
+        user.setStatus(null);
+        
+        return userMapper.toDTO(userRepository.save(user));
     }
 }

@@ -68,5 +68,10 @@ public class SalesCategoryController implements CrudController<SalesCategoryDTO,
     	SalesCategoryDTO salesCategory = salesCategoryService.saveSalesCategoryRequest(dto);
         return new ResponseEntity<>(salesCategory, HttpStatus.CREATED);
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<SalesCategoryDTO> updateSalesCategory(@PathVariable Integer id, @RequestBody SalesCategoryRequestDTO dto) {
+        SalesCategoryDTO salesCategoryDTO = salesCategoryService.updateSalesCategory(id, dto);
+        return new ResponseEntity<>(salesCategoryDTO, HttpStatus.OK);
+    }
     
 }

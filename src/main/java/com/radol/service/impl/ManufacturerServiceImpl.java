@@ -9,14 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ManufacturerDTO;
-import com.radol.dto.ModelDTO;
 import com.radol.dto.request.ManufacturerRequestDTO;
 import com.radol.mapper.ManufacturerFacilityMapper;
 import com.radol.mapper.ManufacturerMapper;
-import com.radol.model.Brand;
 import com.radol.model.Manufacturer;
 import com.radol.model.ManufacturerFacility;
-import com.radol.model.Model;
 import com.radol.repository.ManufacturerRepository;
 import com.radol.service.ManufacturerService;
 
@@ -103,6 +100,26 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	    // Convert and return the DTO
 	    return manufacturerMapper.toDTO(manufacturer);
 	}
+    
+    
+    @Override
+    public ManufacturerDTO updateManufacturer(Integer id, ManufacturerRequestDTO dto) {
+        // Retrieve the existing Manufacturer from the database
+        Manufacturer existingManufacturer = manufacturerRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Manufacturer not found"));
+
+        // Update only the Manufacturer's basic fields
+        existingManufacturer.setManufacturerName(dto.getManufacturerName());
+        existingManufacturer.setManufacturerDescription(dto.getManufacturerDescription());
+        existingManufacturer.setManufacturerStatus(dto.getManufacturerStatus());
+
+        // Save the updated Manufacturer without modifying facilities
+        Manufacturer updatedManufacturer = manufacturerRepository.save(existingManufacturer);
+
+        // Convert to DTO and return
+        return manufacturerMapper.toDTO(updatedManufacturer);
+    }
+
     
     
 }

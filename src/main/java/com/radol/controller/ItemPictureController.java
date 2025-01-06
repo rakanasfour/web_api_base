@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.ItemPictureDTO;
+import com.radol.dto.request.ItemPictureRequestDTO;
 import com.radol.service.ItemPictureService;
 
 @RestController
@@ -59,5 +60,10 @@ public class ItemPictureController implements CrudController<ItemPictureDTO, Int
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         itemPictureService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ItemPictureDTO> updateItemPicture(@PathVariable Integer id, @RequestBody ItemPictureRequestDTO dto) {
+        ItemPictureDTO itemPictureDTO = itemPictureService.updateItemPicture(id, dto);
+        return new ResponseEntity<>(itemPictureDTO, HttpStatus.OK);
     }
 }

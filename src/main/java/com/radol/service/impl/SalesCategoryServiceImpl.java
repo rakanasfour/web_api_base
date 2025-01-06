@@ -70,6 +70,20 @@ public class SalesCategoryServiceImpl implements SalesCategoryService {
 		
 		return salesCategoryMapper.toDTO(salesCategory);
 	}
+	
+	
+
+    @Override
+    public SalesCategoryDTO updateSalesCategory(Integer id, SalesCategoryRequestDTO dto) {
+        SalesCategory salesCategory = new SalesCategory();
+        salesCategory.setSalesCategoryId(id);
+        salesCategory.setSalesCategoryName(dto.getSalesCategoryName());
+        salesCategory.setSalesCategoryMeasurementType(dto.getSalesCategoryMeasurementType());
+        salesCategory.setSalesCategorySystemMeasurement(dto.getSalesCategorySystemMeasurement());
+        return salesCategoryMapper.toDTO(salesCategoryRepository.save(salesCategory));
+    }
+	
+	
 
    
 }

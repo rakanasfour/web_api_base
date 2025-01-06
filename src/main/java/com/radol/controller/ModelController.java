@@ -68,4 +68,10 @@ public class ModelController implements CrudController<ModelDTO, Integer> {
         ModelDTO model = modelService.saveModelRequest(dto);
         return new ResponseEntity<>(model, HttpStatus.CREATED);
     }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ModelDTO> updateModel(@PathVariable Integer id, @RequestBody ModelRequestDTO dto) {
+        ModelDTO modelDTO = modelService.updateModel(id, dto);
+        return new ResponseEntity<>(modelDTO, HttpStatus.OK);
+    }
 }

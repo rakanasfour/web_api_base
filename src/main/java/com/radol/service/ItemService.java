@@ -14,6 +14,8 @@ public interface ItemService  extends CrudService<ItemDTO, Item, Integer>  {
     
     
 	public ItemDTO findItemByIdAdminUOM(Integer id);
+	
+    ItemDTO updateItem(Integer id, ItemRequestDTO dto);
 
 		   
 	}

@@ -9,7 +9,8 @@ public interface ManufacturerFacilityService  extends CrudService<ManufacturerFa
 	
     public ManufacturerFacilityDTO saveFacilityRequest(ManufacturerFacilityRequestDTO dto);
 
-	
+    ManufacturerFacilityDTO updateManufacturerFacility(Integer id, ManufacturerFacilityRequestDTO dto);
+
 
 	   
 }

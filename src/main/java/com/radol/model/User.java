@@ -1,5 +1,4 @@
 package com.radol.model;
-
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 

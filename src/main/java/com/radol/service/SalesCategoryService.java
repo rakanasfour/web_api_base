@@ -8,7 +8,8 @@ public interface SalesCategoryService  extends CrudService<SalesCategoryDTO, Sal
 
 	
 
-	
+    SalesCategoryDTO updateSalesCategory(Integer id, SalesCategoryRequestDTO dto);
+
     public SalesCategoryDTO saveSalesCategoryRequest(SalesCategoryRequestDTO dto);
 	   
 }

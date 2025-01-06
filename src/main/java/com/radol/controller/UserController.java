@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.UserDTO;
+import com.radol.dto.request.UserRequestDTO;
 import com.radol.service.UserService;
 
 
@@ -61,4 +62,12 @@ public class UserController implements CrudController<UserDTO, Integer> {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody UserRequestDTO dto) {
+        UserDTO userDTO = userService.updateUser(id, dto);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+    
 }

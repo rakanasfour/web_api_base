@@ -65,14 +65,22 @@ public class ClassServiceImpl implements ClassService {
 	@Override
 	public ClassDTO saveClassRequest(ClassRequestDTO dto) {
 		
-		ClassEntity classEnity = new ClassEntity();
-		classEnity.setClassName(dto.getClassName());
+		ClassEntity classEntity = new ClassEntity();
+		classEntity.setClassName(dto.getClassName());
 		
-		classRepository.save(classEnity);
+		classRepository.save(classEntity);
 		
-		return classMapper.toDTO(classEnity);
+		return classMapper.toDTO(classEntity);
 		
 		
+	}
+
+	@Override
+	public ClassDTO updateClass(Integer id, ClassRequestDTO dto) {
+		ClassEntity classEntity = new ClassEntity();
+		classEntity.setClassId(id);
+		classEntity.setClassName(dto.getClassName());
+        return classMapper.toDTO(classRepository.save(classEntity));
 	}
 
    

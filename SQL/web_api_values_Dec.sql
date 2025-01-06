@@ -301,6 +301,8 @@ VALUES
 (4, 4),  -- Item 4 categorized as Chewing Tobacco
 (5, 5);  -- Item 5 categorized as Cigarette
 
+
+select * from manufacturer_facilities;
 SELECT uom_manufacturer_pricing_id, COUNT(*)
 FROM uoms
 GROUP BY uom_manufacturer_pricing_id

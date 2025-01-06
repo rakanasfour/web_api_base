@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.radol.dto.UomDTO;
+import com.radol.dto.request.UOMRequestDTO;
 import com.radol.service.UomService;
 
 @RestController
@@ -60,4 +61,11 @@ public class UomController implements CrudController<UomDTO, Integer> {
         uomService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UomDTO> updateUom(@PathVariable Integer id, @RequestBody UOMRequestDTO dto) {
+        UomDTO uomDTO = uomService.updateUom(id, dto);
+        return new ResponseEntity<>(uomDTO, HttpStatus.OK);
+    }
+
 }
