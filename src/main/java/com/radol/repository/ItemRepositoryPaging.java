@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.radol.model.Item;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Integer> {
+public interface ItemRepositoryPaging extends PagingAndSortingRepository<Item, Integer> {
 	
 	
 	//this just to practice
@@ -50,7 +50,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 
 	
 	@Query("SELECT i FROM Item i LEFT JOIN FETCH i.uoms")
-	List<Item> findAllItemsAdmin();
+	Page<Item> findAllItemsAdmin(Pageable pagble);
 	
 	
 	@Query("SELECT DISTINCT i FROM Item i JOIN FETCH i.uoms u")

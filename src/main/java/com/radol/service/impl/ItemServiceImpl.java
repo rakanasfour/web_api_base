@@ -1,11 +1,13 @@
 package com.radol.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.radol.dto.ItemDTO;
@@ -21,12 +23,12 @@ import com.radol.repository.AttributeRepository;
 import com.radol.repository.DocumentStorageRepository;
 import com.radol.repository.ItemAttributeRepository;
 import com.radol.repository.ItemRepository;
+import com.radol.repository.ItemRepositoryPaging;
 import com.radol.repository.ItemSalesCategoryRepository;
 import com.radol.repository.ModelRepository;
 import com.radol.repository.SalesCategoryRepository;
 import com.radol.repository.UomRepository;
 import com.radol.service.ItemService;
-
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -42,29 +44,29 @@ public class ItemServiceImpl implements ItemService {
     private final SalesCategoryRepository salesCategoryRepository;
     private final UomRepository uomRepository;
     private final DocumentStorageRepository documentStorageRepository;
+    private final ItemRepositoryPaging itemRepositoryPaging;
+    
     
     @Autowired
-    public ItemServiceImpl(
-        ItemRepository itemRepository,
-        ItemAttributeRepository itemAttributeRepository,
-        ModelRepository modelRepository,
-        ItemMapper itemMapper,
-        ItemSalesCategoryRepository itemSalesCategoryRepository,
-        AttributeRepository attributeRepository,
-        SalesCategoryRepository salesCategoryRepository,
-        UomRepository uomRepository,
-        DocumentStorageRepository documentStorageRepository
-    ) {
-        this.itemRepository = itemRepository;
-        this.itemAttributeRepository = itemAttributeRepository;
-        this.modelRepository = modelRepository;
-        this.itemMapper = itemMapper;
-        this.itemSalesCategoryRepository = itemSalesCategoryRepository;
-        this.attributeRepository = attributeRepository;
-        this.salesCategoryRepository = salesCategoryRepository;
-        this.uomRepository = uomRepository;
-        this.documentStorageRepository = documentStorageRepository;
-    }
+	public ItemServiceImpl(ItemRepository itemRepository, ItemAttributeRepository itemAttributeRepository,
+			ModelRepository modelRepository, ItemMapper itemMapper,
+			ItemSalesCategoryRepository itemSalesCategoryRepository, AttributeRepository attributeRepository,
+			SalesCategoryRepository salesCategoryRepository, UomRepository uomRepository,
+			DocumentStorageRepository documentStorageRepository, ItemRepositoryPaging itemRepositoryPaging) {
+		super();
+		this.itemRepository = itemRepository;
+		this.itemAttributeRepository = itemAttributeRepository;
+		this.modelRepository = modelRepository;
+		this.itemMapper = itemMapper;
+		this.itemSalesCategoryRepository = itemSalesCategoryRepository;
+		this.attributeRepository = attributeRepository;
+		this.salesCategoryRepository = salesCategoryRepository;
+		this.uomRepository = uomRepository;
+		this.documentStorageRepository = documentStorageRepository;
+		this.itemRepositoryPaging = itemRepositoryPaging;
+	}
+    
+    
 
 
 
@@ -72,6 +74,10 @@ public class ItemServiceImpl implements ItemService {
 	public ItemRepository getItemRepository() {
 		return itemRepository;
 	}
+
+
+
+
 
 
 
@@ -276,6 +282,19 @@ public class ItemServiceImpl implements ItemService {
         item.setModel(model);
 
         return itemMapper.toDTO(itemRepository.save(item));
+    }
+
+
+
+
+    public Page<ItemDTO> findAllwithPaging(int page, int size) {
+        // Fetch paginated data
+    	
+    	PageRequest pr = PageRequest.of(page, size);
+        Page<Item> pagedItems = itemRepositoryPaging.findAllItemsAdmin(pr);
+
+        // Convert entities to DTOs and return the Page<ItemDTO>
+        return pagedItems.map(itemMapper::toDTO);
     }
 
 	

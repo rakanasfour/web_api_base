@@ -52,7 +52,8 @@ channel_default_uom ENUM('SINGLE','SUB_UNIT','UNIT', 'CASE', 'PALLET') NOT NULL
 #many to many with item table(we will have junction table)
 create table attributes(
 attribute_id int UNSIGNED primary key auto_increment,
-attribute_name varchar(25),
+attribute_name varchar(250),
+#attribute_type ENUM('TEXTBOX','CHECKBOX','DROPDOWN' ) NOT NULL,
 attribute_type ENUM('TASTE','SIZE', 'SMELL', 'LOCTION') NOT NULL,
 attribute_assist_text varchar(250)
 );
@@ -124,11 +125,12 @@ CREATE TABLE brands (
     INDEX (brand_name)  
 );
 
+
 # many to one brands
 CREATE TABLE brand_pictures (
     brand_picture_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     brand_picture_name VARCHAR(300),
-    brand_picture_link VARCHAR(300) NOT NULL UNIQUE,
+    brand_picture_link VARCHAR(300) NOT NULL,
     b_p_brand_id INT UNSIGNED NOT NULL,  -- Many-to-one relationship with manufacturers
     FOREIGN KEY (b_p_brand_id) REFERENCES brands(brand_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -149,11 +151,11 @@ INDEX (model_name)
 
 #many to one with models
 CREATE TABLE model_pictures (
-    m_picture_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    m_picture_name VARCHAR(300),
-    m_picture_link VARCHAR(300) NOT NULL UNIQUE,
-    m_picture_model_id INT UNSIGNED NOT NULL,  -- Many-to-one relationship with manufacturers
-    FOREIGN KEY (m_picture_model_id) REFERENCES models(model_id) ON DELETE CASCADE ON UPDATE CASCADE
+    model_picture_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    model_picture_name VARCHAR(300),
+    model_picture_link VARCHAR(300) NOT NULL ,
+    m_p_model_id INT UNSIGNED NOT NULL,  -- Many-to-one relationship with manufacturers
+    FOREIGN KEY (m_p_model_id) REFERENCES models(model_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 #this desifined the sales is it for cigar or nicotine pouches
@@ -257,6 +259,7 @@ foreign key (uom_picture_uom_id) references uoms(uom_id)
 );
 
 
+
 #one to one with items
 create table item_pictures(
 item_picture_id int UNSIGNED primary key auto_increment,
@@ -267,8 +270,8 @@ foreign key (item_p_item_id) references items(item_id)
 );
 
 #oen to many with items table
-create table document_Storage(
-document_Storage_id int UNSIGNED primary key auto_increment,
+create table document_storage(
+document_storage_id int UNSIGNED primary key auto_increment,
 document_storage_1 varchar(300), 
 document_s_item_id int UNSIGNED,
 foreign key (document_s_item_id) references items(item_id)
@@ -311,6 +314,7 @@ CREATE TABLE item_sales_categories (
 );
 
 select * from manufacturer_pricing;
+select * from brands where brand_id =1232;
 select * from uoms;
 
 #CREATE TABLE item_classes (
